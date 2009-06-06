@@ -8,23 +8,32 @@
 
 #import <UIKit/UIKit.h>
 #import "BSPlayFieldView.h"
-#import "BSShipView.h"
+#import "BSShipController.h"
+
 #import "Constants.h"
 
-@interface BSPlayFieldController : UIViewController {
-	NSInteger tilesCount;
-	NSMutableArray *occupiedFields;
+@interface BSPlayFieldController : UIViewController <BSShipDelegate> {
+	// Size of the Field in number of tiles
+	NSNumber *size;
+	
+	// Mutable Array of the ships on the field
 	NSMutableArray *ships;
 	
+	// The Play Field View (duh!)
 	BSPlayFieldView *view;
 }
 
-- (id)initWithTilenumber:(NSInteger)tiles;
-- (void)placeShipInField:(BSShipView *)ship;
-- (void)randomPlaceShipInField:(BSShipView *)ship;
+// Adds a ship to the field - and thus sets the delegate etc.
+- (void)addShip:(BSShipController *)aShip;
 
-- (CGPoint)blockPointForPoint:(CGPoint)point;
+// Returns the closest point in the grid for a point
+- (CGPoint)closestGridpointForPoint:(CGPoint)aPoint;
 
-@property  (nonatomic, retain) BSPlayFieldView *view;
+// Returns all Tiles that have multiple ships on them - and are thus blocking.
+- (NSArray)multiPlacements;
+
+@property (nonatomic, retain) NSNumber *size;
+@property (nonatomic, readonly) NSMutableArray *ships;
+@property (nonatomic, retain) BSPlayFieldView *view;
 
 @end

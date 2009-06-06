@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		491C23490FDABB8800EFCBA7 /* BSShipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491C23480FDABB8800EFCBA7 /* BSShipController.m */; };
 		49A1E15B0F82C7C6003021C0 /* tile_bg_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */; };
 		49A1E1600F82C7DC003021C0 /* BSStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */; };
 		49A1E1610F82C7DC003021C0 /* BSPlayCPUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15F0F82C7DC003021C0 /* BSPlayCPUViewController.m */; };
@@ -32,6 +33,8 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Baddleships_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baddleships_Prefix.pch; sourceTree = "<group>"; };
+		491C23470FDABB8800EFCBA7 /* BSShipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSShipController.h; sourceTree = "<group>"; };
+		491C23480FDABB8800EFCBA7 /* BSShipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSShipController.m; sourceTree = "<group>"; };
 		49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tile_bg_paper.png; path = Classes/tile_bg_paper.png; sourceTree = "<group>"; };
 		49A1E15C0F82C7DC003021C0 /* BSStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStartViewController.h; sourceTree = "<group>"; };
 		49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSStartViewController.m; sourceTree = "<group>"; };
@@ -76,6 +79,8 @@
 				49A1E22B0F82E75B003021C0 /* Constants.h */,
 				49A1E28E0F82EEC6003021C0 /* BSPlayFieldController.h */,
 				49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */,
+				491C23470FDABB8800EFCBA7 /* BSShipController.h */,
+				491C23480FDABB8800EFCBA7 /* BSShipController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 				49A1E16A0F82C7E9003021C0 /* BSShipView.m in Sources */,
 				49A1E16B0F82C7E9003021C0 /* BSSetupScreen.m in Sources */,
 				49A1E2900F82EEC6003021C0 /* BSPlayFieldController.m in Sources */,
+				491C23490FDABB8800EFCBA7 /* BSShipController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

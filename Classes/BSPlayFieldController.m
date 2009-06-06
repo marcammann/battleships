@@ -11,9 +11,9 @@
 
 @implementation BSPlayFieldController
 
-@synthesize view;
+//@synthesize view;
 
-- (id)initWithTilenumber:(NSInteger)theTilesCount {
+/*- (id)initWithTilenumber:(NSInteger)theTilesCount {
 	if (self = [super init]) {
 		tilesCount = theTilesCount;
 		self.view = [[BSPlayFieldView alloc] initWithTilenumber:tilesCount];
@@ -106,7 +106,7 @@
 	return (shipStart - playFieldStart);
 }
 
-
+*/
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -143,11 +143,6 @@
     // Release anything that's not essential, such as cached data
 }
 
-
-- (void)dealloc {
-	[view release];
-    [super dealloc];
-}
 
 
 @end
