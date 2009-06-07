@@ -53,10 +53,22 @@ typedef enum {
 	
 	// The Delegate, preferably the play field controller, to tell the ship, what it can do
 	id delegate;
+	
+	// The hits this ship has taken
+	NSMutableArray *hits;
 }
+
+// Initializer with the type
+- (id)initWithType:(BSShipType)type;
 
 // Returns a point with the tile position in the current play field
 - (CGPoint)positionInGrid;
+
+// Checks if a point would mean a hit on this ship
+- (BOOL)checkHitForPoint:(CGPoint)point;
+
+// Sets a point on the ship as hit.
+- (void)setHit:(CGPoint)tile;
 
 @property (nonatomic, retain) BSShipView *view;
 

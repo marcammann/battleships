@@ -23,11 +23,17 @@
 	BSPlayFieldView *view;
 }
 
+// Initializer with size
+- (id)initWithSize:(NSNumber *)size;
+
 // Adds a ship to the field - and thus sets the delegate etc.
 - (void)addShip:(BSShipController *)aShip;
 
 // Returns the closest point in the grid for a point
 - (CGPoint)closestGridpointForPoint:(CGPoint)aPoint;
+
+// Returns the tile a certain point is in
+- (CGPoint)tileForPoint:(CGPoint)aPoint;
 
 // Returns all Tiles that have multiple ships on them - and are thus blocking.
 - (NSArray)multiPlacements;

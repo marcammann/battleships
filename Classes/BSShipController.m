@@ -19,6 +19,14 @@
 @synthesize movable;
 @synthesize view;
 
+- (id)initWithType:(BSShipType)theType {
+	if (self = [super init]) {
+		type = theType;
+	}
+	
+	return self;
+}
+
 - (void)dealloc {
 	[length release];
 	length = nil;
@@ -48,5 +56,17 @@
 - (CGPoint)positionInGrid {
 	return CGPointMake(0.0f, 0.0f);
 }
+
+# pragma mark Setters which trigger updates
+
+- (void)setType {
+	
+}
+
+- (void)setOrientation {
+	
+}
+
+
 
 @end
