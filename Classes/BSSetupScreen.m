@@ -9,19 +9,24 @@
 #import "BSSetupScreen.h"
 #import "Constants.h"
 
+#import "BSShipController.h"
+
 @implementation BSSetupScreen
 
 CGSize delayOffset;
 BSShipView *currentShip;
 NSTimeInterval touchStart;
+BSShipController *ship;
 
 BOOL rotating;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-		playFieldController = [[BSPlayFieldController alloc] initWithTilenumber:10];
+		//playFieldController = [[BSPlayFieldController alloc] initWithTilenumber:10];
 		self.backgroundColor = [UIColor yellowColor];
-		[self createShips];
+		
+		ship = [[BSShipController alloc] initWithType:BSShipType3];
+		//[self createShips];
     }
     return self;
 }
@@ -47,7 +52,7 @@ BOOL rotating;
 	ships = [[NSArray arrayWithArray:theShips] retain];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+/*- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	touchStart = touch.timestamp;
 
@@ -122,7 +127,7 @@ BOOL rotating;
  newPos.y = (fieldY * 30.0f) + 20.0f;
  }
  
- ship.frame =  CGRectMake(newPos.x, newPos.y, self.frame.size.width, self.frame.size.height);*/
+ ship.frame =  CGRectMake(newPos.x, newPos.y, self.frame.size.width, self.frame.size.height);
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	//NSLog(@"%i - %i", [touches.allObjects count], [[[event allTouches] allObjects] count]);
@@ -141,7 +146,7 @@ BOOL rotating;
 	}
 
 	
-	currentShip.dragPosition = currentShip.center;
+	//currentShip.dragPosition = currentShip.center;
 	currentShip = nil;
 }
 
@@ -149,13 +154,10 @@ BOOL rotating;
 	
 }
 
-
+*/
 - (void)drawRect:(CGRect)rect {
 	[self addSubview:playFieldController.view];
-	for (BSShipView *ship in ships) {
-		[self addSubview:ship];
-		[playFieldController placeShipInField:ship];
-	}
+	[self addSubview:ship.view];
 }
 
 

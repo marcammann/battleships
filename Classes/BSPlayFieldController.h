@@ -36,7 +36,7 @@
 - (CGPoint)tileForPoint:(CGPoint)aPoint;
 
 // Returns all Tiles that have multiple ships on them - and are thus blocking.
-- (NSArray)multiPlacements;
+- (NSArray *)multiAssignments;
 
 @property (nonatomic, retain) NSNumber *size;
 @property (nonatomic, readonly) NSMutableArray *ships;

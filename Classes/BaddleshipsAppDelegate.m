@@ -14,7 +14,7 @@
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-	[application setStatusBarHidden:YES];
+	//[application setStatusBarHidden:YES];
 	
 	baseContainer = [[BSStartViewController alloc] init];
 	
@@ -23,6 +23,8 @@
 	
 	[window addSubview:baseNavigation.view];
     [window makeKeyAndVisible];
+	
+	[[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeRight];
 }
 
 

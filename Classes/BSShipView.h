@@ -12,12 +12,13 @@
 - (void)ship:(id)aShip touchesStartedAt:(CGPoint)aPoint;
 - (void)ship:(id)aShip touchesMovedFrom:(CGPoint)fromPoint to:(CGPoint)toPoint;
 - (void)ship:(id)aShip touchesEndedAt:(CGPoint)aPoint;
+- (void)ship:(id)aShip tappedAt:(CGPoint)aPoint;
 @end
 
 
 @interface BSShipView : UIView {
 	// The views ship controller
-	id shipController;
+	id<BSShipViewDelegate> shipController;
 	
 	// The ships background image
 	UIImage *image;
@@ -25,5 +26,7 @@
 	// The ships virtual drag position (if it is on a grid, this still changes)
 	CGPoint dragPosition;
 }
+
+- (id)initWithFrame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController;
 
 @end
