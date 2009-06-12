@@ -9,14 +9,9 @@
 #import "BSShipView.h"
 #import "Constants.h"
 
-@interface BSShipView (private)
-CGPoint startTouchPosition;
-CGPoint currentTouchPosition;
-CGPoint stopTouchPosition;
-@end
-
-
 @implementation BSShipView
+
+@synthesize dragPosition;
 
 - (id)initWithFrame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController {
 	if (self = [super initWithFrame:aFrame]) {
@@ -30,8 +25,8 @@ CGPoint stopTouchPosition;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = touches.anyObject;
 	startTouchPosition = [touch locationInView:[self superview]];
-	
-	dragPosition = startTouchPosition;
+
+	dragPosition = self.frame.origin;	
 	
 	[shipController ship:self touchesStartedAt:startTouchPosition];
 }
@@ -39,23 +34,28 @@ CGPoint stopTouchPosition;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = touches.anyObject;
 	currentTouchPosition = [touch locationInView:[self superview]];
+	CGPoint lastTouchPosition = [touch previousLocationInView:[self superview]];
 	
-	dragPosition = currentTouchPosition;
+	dragPosition = CGPointMake(dragPosition.x + (currentTouchPosition.x - lastTouchPosition.x), dragPosition.y + (currentTouchPosition.y - lastTouchPosition.y));
 	
-	[shipController ship:self touchesMovedFrom:[touch previousLocationInView:[self superview]] to:currentTouchPosition];
+	[shipController ship:self touchesMovedFrom:lastTouchPosition to:currentTouchPosition];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = touches.anyObject;
 	stopTouchPosition = [touch locationInView:[self superview]];
-	
-	dragPosition = stopTouchPosition;
+	currentTouchPosition = CGPointZero;
 	
 	if (touch.tapCount == 1) {
 		[shipController ship:self tappedAt:stopTouchPosition];
 	} else {
 		[shipController ship:self touchesEndedAt:stopTouchPosition];
 	}
+	
+	dragPosition = self.frame.origin;
+	
+	startTouchPosition = CGPointZero;
+	stopTouchPosition = CGPointZero;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {

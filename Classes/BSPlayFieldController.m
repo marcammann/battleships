@@ -7,22 +7,68 @@
 //
 
 #import "BSPlayFieldController.h"
-
+#import "BSShipView.h"
 
 @implementation BSPlayFieldController
 
-//@synthesize view;
+@synthesize view;
 
-/*- (id)initWithTilenumber:(NSInteger)theTilesCount {
+- (id)initWithTilenumber:(NSInteger)theTilesCount {
 	if (self = [super init]) {
-		tilesCount = theTilesCount;
-		self.view = [[BSPlayFieldView alloc] initWithTilenumber:tilesCount];
+		size = [NSNumber numberWithInt:theTilesCount];
+		self.view = [[BSPlayFieldView alloc] initWithTilenumber:[size integerValue]];
 	}
 	
 	return self;
 }
 
-- (void)placeShipInField:(BSShipView *)ship  {
+- (CGPoint)gridpointForPoint:(CGPoint)aPoint {
+	CGPoint viewOffset = CGPointMake(view.frame.origin.x + kPlayFieldFrame, view.frame.origin.y + kPlayFieldFrame);
+	CGPoint gridpoint = CGPointMake(round((aPoint.x - viewOffset.x) / kTileSize), round((aPoint.y - viewOffset.y) / kTileSize));
+	
+	NSLog(@"Gridp: %.2f / %.2f", gridpoint.x, gridpoint.y);
+	
+	return gridpoint;
+	
+}
+
+- (CGPoint)coordinateForGridpoint:(CGPoint)aPoint {
+	CGPoint viewOffset = CGPointMake(view.frame.origin.x + kPlayFieldFrame, view.frame.origin.y + kPlayFieldFrame);	
+	CGPoint coordinates = CGPointMake(viewOffset.x + (aPoint.x * kTileSize), viewOffset.y + (aPoint.y * kTileSize));
+
+	return coordinates;
+}
+
+# pragma mark BSShipViewDelegate Methods
+
+- (void)ship:(id)aShip movedToPoint:(CGPoint)aPoint {
+	
+}
+
+- (void)ship:(id)aShip rotatedToOrientation:(BSShipOrientation)anOrientation {
+	
+}
+
+- (CGPoint)ship:(id)aShip pointToMoveForPoint:(CGPoint)aPoint {
+	//NSLog(@"%.2f / %.2f", CGRectGetMaxX([(BSShipController *)aShip view].frame), CGRectGetMaxX(self.view.frame));
+	if ([self gridpointForPoint:CGPointMake(CGRectGetMaxX([aShip view].frame), CGRectGetMaxY([aShip view].frame))].x > 10) {
+		return aPoint;
+	}
+	
+	return [self coordinateForGridpoint:[self gridpointForPoint:aPoint]];
+}
+
+- (BOOL)ship:(id)aShip shouldMoveToPoint:(CGPoint)aPoint {
+	// Border Top:
+	CGPoint viewOffset = CGPointMake(view.frame.origin.x + kPlayFieldFrame, view.frame.origin.y + kPlayFieldFrame);
+	if (aPoint.y < viewOffset.y) {
+		return NO;
+	}
+	
+	return YES;
+}
+
+/*- (void)placeShipInField:(BSShipView *)ship  {
 	CGPoint blockPoint = [self blockPointForPoint:ship.frame.origin];
 	//NSLog(@"%i", blockPoint.x);
 	ship.center = CGPointMake(blockPoint.x + CGRectGetWidth(ship.frame)/2, blockPoint.y + CGRectGetHeight(ship.frame)/2);
@@ -76,12 +122,12 @@
 	}
 	
 	if (tileX >= tilesCount) {
-		tileX == tilesCount - 1;
+		tileX = tilesCount - 1;
 	}
 	if (tileY >= tilesCount) {
-		tileY == tilesCount - 1;
+		tileY = tilesCount - 1;
 	}
-	
+
 	NSLog(@"Foo");
 	CGPoint result = CGPointMake(fieldOffsetX + tileX * kTileSize, fieldOffsetY + tileY * kTileSize);
 	NSLog(@"Point %.2f / %.2f", result.x, result.y);

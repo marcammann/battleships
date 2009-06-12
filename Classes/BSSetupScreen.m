@@ -22,7 +22,7 @@ BOOL rotating;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-		//playFieldController = [[BSPlayFieldController alloc] initWithTilenumber:10];
+		playFieldController = [[BSPlayFieldController alloc] initWithTilenumber:10];
 		self.backgroundColor = [UIColor yellowColor];
 		
 		ship = [[BSShipController alloc] initWithType:BSShipType3];
@@ -157,6 +157,7 @@ BOOL rotating;
 */
 - (void)drawRect:(CGRect)rect {
 	[self addSubview:playFieldController.view];
+	[ship setDelegate:playFieldController];
 	[self addSubview:ship.view];
 }
 

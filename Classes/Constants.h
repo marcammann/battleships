@@ -13,6 +13,7 @@
 #define kTileSize 30.0f
 #define kPlayFieldSize 300.0f
 #define kTotalFieldSize 320.0f
+#define kPlayFieldFrame (kTotalFieldSize - kPlayFieldSize)
 
 #define kTapDelay 0.2
 

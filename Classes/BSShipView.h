@@ -17,6 +17,10 @@
 
 
 @interface BSShipView : UIView {
+	CGPoint startTouchPosition;
+	CGPoint currentTouchPosition;
+	CGPoint stopTouchPosition;
+	
 	// The views ship controller
 	id<BSShipViewDelegate> shipController;
 	
@@ -26,6 +30,8 @@
 	// The ships virtual drag position (if it is on a grid, this still changes)
 	CGPoint dragPosition;
 }
+
+@property (nonatomic, readonly) CGPoint dragPosition;
 
 - (id)initWithFrame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController;
 

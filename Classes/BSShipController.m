@@ -67,7 +67,15 @@
 }
 
 - (void)setOrientation {
+	CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2.0f);
+	if (CGAffineTransformEqualToTransform(view.transform, transform)) {
+		view.transform = CGAffineTransformIdentity;
+	} else {
+		view.transform = transform;
+	}
 	
+	CGPoint point = [delegate ship:self pointToMoveForPoint:view.frame.origin];
+	[view setFrame:CGRectMake(point.x, point.y, view.frame.size.width, view.frame.size.height)];
 }
 
 # pragma mark BSShipViewDelegate Methods
@@ -80,7 +88,15 @@
 	CGPoint diff = CGPointMake(fromPoint.x - toPoint.x,	fromPoint.y - toPoint.y);
 	
 	BSShipView *ship = (BSShipView *)aShip;
+	
+	if (![delegate ship:self shouldMoveToPoint:CGPointMake(ship.frame.origin.x - diff.x, ship.frame.origin.y - diff.y)]) {
+		return;
+	}
+	
 	[ship setCenter:CGPointMake(ship.center.x - diff.x, ship.center.y - diff.y)];
+	
+	CGPoint point = [delegate ship:self pointToMoveForPoint:ship.dragPosition];
+	[ship setFrame:CGRectMake(point.x, point.y, ship.frame.size.width, ship.frame.size.height)];
 }
 
 - (void)ship:(id)aShip touchesEndedAt:(CGPoint)aPoint {
@@ -90,12 +106,7 @@
 - (void)ship:(id)aShip tappedAt:(CGPoint)aPoint {
 	BSShipView *ship = (BSShipView *)aShip;
 	
-	CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2.0f);
-	if (CGAffineTransformEqualToTransform(ship.transform, transform)) {
-		ship.transform = CGAffineTransformIdentity;
-	} else {
-		ship.transform = transform;
-	}
+	[self setOrientation];
 }
 
 
