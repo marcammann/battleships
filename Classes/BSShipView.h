@@ -29,10 +29,18 @@
 	
 	// The ships virtual drag position (if it is on a grid, this still changes)
 	CGPoint dragPosition;
+	
+	// The ships min and max coordinates. Literally means: left upper and right lower corner
+	CGPoint minCoordinate;
+	CGPoint maxCoordinate;
 }
 
 @property (nonatomic, readonly) CGPoint dragPosition;
+@property (nonatomic, readonly) CGPoint minCoordinate;
+@property (nonatomic, readonly) CGPoint maxCoordinate;
 
 - (id)initWithFrame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController;
+- (void)resetDragPosition;
+
 
 @end

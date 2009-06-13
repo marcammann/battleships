@@ -21,6 +21,7 @@
 		49A1E16A0F82C7E9003021C0 /* BSShipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E1660F82C7E9003021C0 /* BSShipView.m */; };
 		49A1E16B0F82C7E9003021C0 /* BSSetupScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E1680F82C7E9003021C0 /* BSSetupScreen.m */; };
 		49A1E2900F82EEC6003021C0 /* BSPlayFieldController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */; };
+		49A404550FE2F8F7004A7E10 /* BSCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A404540FE2F8F7004A7E10 /* BSCanvasView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		49A1E22B0F82E75B003021C0 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		49A1E28E0F82EEC6003021C0 /* BSPlayFieldController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayFieldController.h; sourceTree = "<group>"; };
 		49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayFieldController.m; sourceTree = "<group>"; };
+		49A404530FE2F8F7004A7E10 /* BSCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCanvasView.h; sourceTree = "<group>"; };
+		49A404540FE2F8F7004A7E10 /* BSCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSCanvasView.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +146,8 @@
 				49A1E1660F82C7E9003021C0 /* BSShipView.m */,
 				49A1E1670F82C7E9003021C0 /* BSSetupScreen.h */,
 				49A1E1680F82C7E9003021C0 /* BSSetupScreen.m */,
+				49A404530FE2F8F7004A7E10 /* BSCanvasView.h */,
+				49A404540FE2F8F7004A7E10 /* BSCanvasView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				49A1E16B0F82C7E9003021C0 /* BSSetupScreen.m in Sources */,
 				49A1E2900F82EEC6003021C0 /* BSPlayFieldController.m in Sources */,
 				491C23490FDABB8800EFCBA7 /* BSShipController.m in Sources */,
+				49A404550FE2F8F7004A7E10 /* BSCanvasView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

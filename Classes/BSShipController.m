@@ -62,20 +62,38 @@
 
 # pragma mark Setters which trigger updates
 
-- (void)setType {
-	
+// Sets the leftupper point to somewhere else
+- (void)setCoordinate:(CGPoint)aPoint animated:(BOOL)animated {
+	view.center = CGPointMake(view.center.x + (aPoint.x - view.frame.origin.x), view.center.y + (aPoint.y - view.frame.origin.y));
+	[delegate ship:self movedToPoint:aPoint];
 }
 
-- (void)setOrientation {
-	CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2.0f);
-	if (CGAffineTransformEqualToTransform(view.transform, transform)) {
+- (void)setType:(BSShipType)aType {
+	type = aType;
+	
+	// TODO: Change the frame
+}
+
+- (void)setOrientation:(BSShipOrientation)anOrientation {
+	orientation = anOrientation;
+	
+	CGAffineTransform oldTransform = view.transform;
+	
+	if (orientation == BSShipOrientationHorizontal) {
 		view.transform = CGAffineTransformIdentity;
 	} else {
+		CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2.0f);
 		view.transform = transform;
 	}
 	
-	CGPoint point = [delegate ship:self pointToMoveForPoint:view.frame.origin];
-	[view setFrame:CGRectMake(point.x, point.y, view.frame.size.width, view.frame.size.height)];
+	if ([delegate ship:self shouldMoveToPoint:view.minCoordinate]) {
+		CGPoint point = [delegate ship:self pointToMoveForPoint:view.frame.origin];
+		[self setCoordinate:point animated:NO];
+	} else {
+		view.transform = oldTransform;
+	}
+	
+	[delegate ship:self rotatedToOrientation:newOrientation];
 }
 
 # pragma mark BSShipViewDelegate Methods
@@ -89,14 +107,21 @@
 	
 	BSShipView *ship = (BSShipView *)aShip;
 	
-	if (![delegate ship:self shouldMoveToPoint:CGPointMake(ship.frame.origin.x - diff.x, ship.frame.origin.y - diff.y)]) {
+	NSLog(@"Diff: %.2f / %.2f", diff.x, diff.y);
+
+	CGPoint leftUpper = CGPointMake(ship.minCoordinate.x - diff.x, ship.minCoordinate.y - diff.y);
+	if (![delegate ship:self shouldMoveToPoint:leftUpper]) {
+		[ship resetDragPosition];
 		return;
 	}
 	
-	[ship setCenter:CGPointMake(ship.center.x - diff.x, ship.center.y - diff.y)];
-	
 	CGPoint point = [delegate ship:self pointToMoveForPoint:ship.dragPosition];
-	[ship setFrame:CGRectMake(point.x, point.y, ship.frame.size.width, ship.frame.size.height)];
+	if ([delegate ship:self shouldMoveToPoint:point]) {
+		[self setCoordinate:point animated:NO];
+	} else {
+		[ship resetDragPosition];
+		return;
+	}
 }
 
 - (void)ship:(id)aShip touchesEndedAt:(CGPoint)aPoint {
@@ -104,9 +129,9 @@
 }
 
 - (void)ship:(id)aShip tappedAt:(CGPoint)aPoint {
-	BSShipView *ship = (BSShipView *)aShip;
+	BSShipOrientation newOrientation = (orientation == BSShipOrientationHorizontal) ? BSShipOrientationVertical : BSShipOrientationHorizontal;
 	
-	[self setOrientation];
+	[self setOrientation:newOrientation];
 }
 
 

@@ -12,6 +12,9 @@
 @implementation BSShipView
 
 @synthesize dragPosition;
+@synthesize minCoordinate;
+@synthesize maxCoordinate;
+
 
 - (id)initWithFrame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController {
 	if (self = [super initWithFrame:aFrame]) {
@@ -63,6 +66,18 @@
 	stopTouchPosition = [touch locationInView:[self superview]];
 	
 	[shipController ship:self touchesEndedAt:stopTouchPosition];
+}
+
+- (CGPoint)minCoordinate {
+	return CGPointMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame));
+}
+
+- (CGPoint)maxCoordinate {
+	return CGPointMake(CGRectGetMaxX(self.frame), CGRectGetMaxY(self.frame));	
+}
+
+- (void)resetDragPosition {
+	dragPosition = [self minCoordinate];
 }
 
 @end

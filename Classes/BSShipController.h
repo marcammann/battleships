@@ -70,6 +70,9 @@ typedef enum {
 // Sets a point on the ship as hit.
 - (void)setHit:(CGPoint)tile;
 
+// Sets or Moves the ship to some other coordinates
+- (void)setCoordinate:(CGPoint)aPoint animated:(BOOL)animated;
+
 @property (nonatomic, retain) BSShipView *view;
 
 @property (readwrite, getter=isMovable) BOOL movable;

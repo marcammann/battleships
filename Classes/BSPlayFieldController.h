@@ -30,7 +30,7 @@
 - (void)addShip:(BSShipController *)aShip;
 
 // Returns the closest point in the grid for a point
-- (CGPoint)gridpointForPoint:(CGPoint)aPoint;
+- (CGPoint)gridpointForCoordinate:(CGPoint)aPoint;
 
 // Returns the coordinates in the parent view for a given point
 - (CGPoint)coordinateForGridpoint:(CGPoint)aPoint;
@@ -43,6 +43,7 @@
 
 // Returns the left upper point where the grid starts
 - (CGPoint)gridOffset;
+
 
 @property (nonatomic, retain) NSNumber *size;
 @property (nonatomic, readonly) NSMutableArray *ships;

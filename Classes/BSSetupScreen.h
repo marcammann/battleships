@@ -10,10 +10,13 @@
 #import "BSShipView.h"
 #import "BSPlayFieldView.h"
 #import "BSPlayFieldController.h"
+#import "BSCanvasView.h"
 
 @interface BSSetupScreen : UIView {
 	NSArray *ships;
 	BSPlayFieldController *playFieldController;
+	
+	BSCanvasView *canvas;
 }
 
 - (void)createShips;

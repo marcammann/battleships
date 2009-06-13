@@ -17,14 +17,15 @@
 	if (self = [super init]) {
 		size = [NSNumber numberWithInt:theTilesCount];
 		self.view = [[BSPlayFieldView alloc] initWithTilenumber:[size integerValue]];
+		//self.view.center = CGPointMake(160.0f, 160.0f);
 	}
 	
 	return self;
 }
 
-- (CGPoint)gridpointForPoint:(CGPoint)aPoint {
-	CGPoint viewOffset = CGPointMake(view.frame.origin.x + kPlayFieldFrame, view.frame.origin.y + kPlayFieldFrame);
-	CGPoint gridpoint = CGPointMake(round((aPoint.x - viewOffset.x) / kTileSize), round((aPoint.y - viewOffset.y) / kTileSize));
+- (CGPoint)gridpointForCoordinate:(CGPoint)aPoint {
+	CGPoint gridOffset = [self gridOffset];
+	CGPoint gridpoint = CGPointMake(round((aPoint.x - gridOffset.x) / kTileSize), round((aPoint.y - gridOffset.y) / kTileSize));
 	
 	NSLog(@"Gridp: %.2f / %.2f", gridpoint.x, gridpoint.y);
 	
@@ -33,10 +34,14 @@
 }
 
 - (CGPoint)coordinateForGridpoint:(CGPoint)aPoint {
-	CGPoint viewOffset = CGPointMake(view.frame.origin.x + kPlayFieldFrame, view.frame.origin.y + kPlayFieldFrame);	
-	CGPoint coordinates = CGPointMake(viewOffset.x + (aPoint.x * kTileSize), viewOffset.y + (aPoint.y * kTileSize));
-
+	CGPoint gridOffset = [self gridOffset];
+	CGPoint coordinates = CGPointMake(gridOffset.x + (aPoint.x * kTileSize), gridOffset.y + (aPoint.y * kTileSize));
+	
 	return coordinates;
+}
+
+- (CGPoint)gridOffset {
+	return CGPointMake(view.frame.origin.x + view.playField.frame.origin.x, view.frame.origin.y + view.playField.frame.origin.y);
 }
 
 # pragma mark BSShipViewDelegate Methods
@@ -49,23 +54,36 @@
 	
 }
 
-- (CGPoint)ship:(id)aShip pointToMoveForPoint:(CGPoint)aPoint {
-	//NSLog(@"%.2f / %.2f", CGRectGetMaxX([(BSShipController *)aShip view].frame), CGRectGetMaxX(self.view.frame));
-	if ([self gridpointForPoint:CGPointMake(CGRectGetMaxX([aShip view].frame), CGRectGetMaxY([aShip view].frame))].x > 10) {
+- (CGPoint)ship:(id)aShip pointToMoveForPoint:(CGPoint)aPoint {	
+	BSShipController *theShip = (BSShipController *)aShip;
+	
+	if ([self gridpointForCoordinate:theShip.view.maxCoordinate].x > [size intValue] ||
+		[self gridpointForCoordinate:theShip.view.minCoordinate].x < 0 ||
+		[self gridpointForCoordinate:theShip.view.minCoordinate].y < 0) {
 		return aPoint;
 	}
 	
-	return [self coordinateForGridpoint:[self gridpointForPoint:aPoint]];
+	return [self coordinateForGridpoint:[self gridpointForCoordinate:aPoint]];
 }
 
 - (BOOL)ship:(id)aShip shouldMoveToPoint:(CGPoint)aPoint {
-	// Border Top:
-	CGPoint viewOffset = CGPointMake(view.frame.origin.x + kPlayFieldFrame, view.frame.origin.y + kPlayFieldFrame);
-	if (aPoint.y < viewOffset.y) {
-		return NO;
+	BSShipController *theShip = (BSShipController *)aShip;
+	
+	NSLog(@"Next Point: %.2f / %.2f", aPoint.x, aPoint.y);
+	
+	CGRect nextFrame = CGRectMake(theShip.view.minCoordinate.x + (aPoint.x - theShip.view.minCoordinate.x), theShip.view.minCoordinate.y + (aPoint.y - theShip.view.minCoordinate.y),
+									theShip.view.frame.size.width, theShip.view.frame.size.height);
+	
+	//NSLog(@"%.2f / %.2f | %.2f / %.2f", CGRectGetMinX(nextFrame), CGRectGetMinY(nextFrame), CGRectGetMaxX(nextFrame), CGRectGetMaxY(nextFrame));
+	
+	// Just check that the leftmost / rightmost point is still in the parentView
+	// And check that the topmost / lowermost point is still in the parentView
+	NSLog(@"Contained: %i", CGRectContainsRect([self.view superview].frame, nextFrame));
+	if (CGRectContainsRect([self.view superview].frame, nextFrame)) {
+		return YES;
 	}
 	
-	return YES;
+	return NO;
 }
 
 /*- (void)placeShipInField:(BSShipView *)ship  {
