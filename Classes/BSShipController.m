@@ -93,7 +93,7 @@
 		view.transform = oldTransform;
 	}
 	
-	[delegate ship:self rotatedToOrientation:newOrientation];
+	[delegate ship:self rotatedToOrientation:orientation];
 }
 
 # pragma mark BSShipViewDelegate Methods
