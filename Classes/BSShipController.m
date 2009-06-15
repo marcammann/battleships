@@ -21,10 +21,11 @@
 @synthesize movable;
 @synthesize view;
 
-- (id)initWithType:(BSShipType)theType {
+- (id)initWithType:(BSShipType)theType tileSize:(CGFloat)theTileSize {
 	if (self = [super init]) {
+		tileSize = theTileSize;
 		type = theType;
-		view = [[BSShipView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 30.0f, 120.0f) controller:self];
+		view = [[BSShipView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tileSize, tileSize * [[NSNumber numberWithInt:type + 2] intValue]) controller:self];
 	}
 	
 	return self;
@@ -55,6 +56,10 @@
 }
 
 # pragma mark Accessor Methods
+
+- (NSNumber *)length {
+	return [NSNumber numberWithInt:(type + 2)];
+}
 
 - (CGPoint)positionInGrid {
 	return CGPointMake(0.0f, 0.0f);
@@ -107,7 +112,7 @@
 	
 	BSShipView *ship = (BSShipView *)aShip;
 	
-	NSLog(@"Diff: %.2f / %.2f", diff.x, diff.y);
+	//NSLog(@"Diff: %.2f / %.2f", diff.x, diff.y);
 
 	CGPoint leftUpper = CGPointMake(ship.minCoordinate.x - diff.x, ship.minCoordinate.y - diff.y);
 	if (![delegate ship:self shouldMoveToPoint:leftUpper]) {
@@ -116,6 +121,7 @@
 	}
 	
 	CGPoint point = [delegate ship:self pointToMoveForPoint:ship.dragPosition];
+	
 	if ([delegate ship:self shouldMoveToPoint:point]) {
 		[self setCoordinate:point animated:NO];
 	} else {

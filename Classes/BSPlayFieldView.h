@@ -8,24 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BSPlayFieldBlock : UIView {
-	NSInteger x;
-	NSInteger y;
-	BOOL occupied;
-}
-
-@property (assign) NSInteger x, y;
-@property (assign) BOOL occupied;
-@end
-
 @interface BSPlayFieldView : UIView {
 	UIView *playField;
 	UIView *indexRow;
 	UIView *indexColumn;
+	
+	id controller;
+	
+	NSNumber *size;
+	
+	CGFloat tileSize;
 }
 
 @property (readonly) UIView *playField;
+@property (readonly) CGFloat tileSize;
 
-- (id)initWithTilenumber:(NSInteger)number;
+- (id)initWithSize:(NSNumber *)size frame:(CGRect)frame;
 
 @end

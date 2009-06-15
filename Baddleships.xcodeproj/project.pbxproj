@@ -78,12 +78,12 @@
 				49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */,
 				49A1E15E0F82C7DC003021C0 /* BSPlayCPUViewController.h */,
 				49A1E15F0F82C7DC003021C0 /* BSPlayCPUViewController.m */,
-				49A1E1620F82C7E9003021C0 /* Views */,
-				49A1E22B0F82E75B003021C0 /* Constants.h */,
 				49A1E28E0F82EEC6003021C0 /* BSPlayFieldController.h */,
 				49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */,
 				491C23470FDABB8800EFCBA7 /* BSShipController.h */,
 				491C23480FDABB8800EFCBA7 /* BSShipController.m */,
+				49A1E22B0F82E75B003021C0 /* Constants.h */,
+				49A1E1620F82C7E9003021C0 /* Views */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

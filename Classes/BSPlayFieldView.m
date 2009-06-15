@@ -10,34 +10,41 @@
 #import "Constants.h"
 
 
-@implementation BSPlayFieldBlock
-@synthesize x, y, occupied;
-@end
-
 @implementation BSPlayFieldView
 
 @synthesize playField;
+@synthesize tileSize;
 
-- (id)initWithTilenumber:(NSInteger)number {
-	CGRect frame = CGRectMake(0.0f, 0.0f, kTotalFieldSize, kTotalFieldSize);
-    if (self = [super initWithFrame:frame]) {
+- (id)initWithSize:(NSNumber *)size frame:(CGRect)aFrame {
+    if (self = [super initWithFrame:aFrame]) {
 		playField = [[UIView alloc] init];
 		indexRow = [[UIView alloc] init];
 		indexColumn = [[UIView alloc] init];
+		
+		CGFloat prop = self.frame.size.width / kTotalFieldSize;
+		tileSize = kTileSize * prop;
     }
     return self;
 }
 
 - (void)drawRect:(CGRect)rect {
-	playField.frame = CGRectMake(kTotalFieldSize - kPlayFieldSize, kTotalFieldSize - kPlayFieldSize, kPlayFieldSize, kPlayFieldSize);
-	playField.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tile_bg_paper.png"]];
+	// Get the basic proportions
+	CGFloat prop = self.frame.size.width / kTotalFieldSize;
+	
+	CGFloat indexBarSize = (kTotalFieldSize - kPlayFieldSize) * prop;
+	CGFloat playFieldSize = kPlayFieldSize * prop;
+	
+	playField.frame = CGRectMake(indexBarSize, indexBarSize, playFieldSize, playFieldSize);
+	
+	UIImage *bgImage = [[UIImage imageNamed:@"tile_bg_paper.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:2];
+	playField.backgroundColor = [UIColor colorWithPatternImage:bgImage];
 	[self addSubview:playField];
 
-	indexRow.frame = CGRectMake(kTotalFieldSize - kPlayFieldSize, 0.0f, kPlayFieldSize, kTotalFieldSize - kPlayFieldSize);
+	indexRow.frame = CGRectMake(indexBarSize, 0.0f, playFieldSize, indexBarSize);
 	indexRow.backgroundColor = [UIColor greenColor];
 	[self addSubview:indexRow];
 	
-	indexColumn.frame = CGRectMake(0.0f, kTotalFieldSize - kPlayFieldSize, kTotalFieldSize - kPlayFieldSize, kPlayFieldSize);
+	indexColumn.frame = CGRectMake(0.0f, indexBarSize, indexBarSize, playFieldSize);
 	indexColumn.backgroundColor = [UIColor lightGrayColor];
 	[self addSubview:indexColumn];
     

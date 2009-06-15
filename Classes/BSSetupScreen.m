@@ -18,7 +18,8 @@
     if (self = [super initWithFrame:frame]) {
 		canvas = [[BSCanvasView alloc] initWithFrame:frame];
 		
-		playFieldController = [[BSPlayFieldController alloc] initWithTilenumber:10];
+		playFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(330.0f, 0.0f, 128.0f, 128.0f)];
+		ownFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(0.0f, 0.0f, 320.0f, 320.0f)];
 		
 		[self createShips];
     }
@@ -27,25 +28,24 @@
 
 - (void)createShips {
 	NSMutableArray *sizeCount = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], // Size 0
-								 [NSNumber numberWithInt:0], // Size 1
-								 [NSNumber numberWithInt:4], // Size 2
-								 [NSNumber numberWithInt:3], // Size 3
-								 [NSNumber numberWithInt:2], // Size 4
-								 [NSNumber numberWithInt:1], nil]; // Size 5
+								 [NSNumber numberWithInt:0],
+								 [NSNumber numberWithInt:0],
+								 [NSNumber numberWithInt:0], // Size 1 // Size 2
+								 [NSNumber numberWithInt:1],
+								 [NSNumber numberWithInt:1],
+								 [NSNumber numberWithInt:1],
+								 [NSNumber numberWithInt:2],
+								 [NSNumber numberWithInt:2],
+								 [NSNumber numberWithInt:3], nil]; // Size 5
 	
 	NSMutableArray *theShips = [NSMutableArray array];
-	int j = 0;
 	for (NSNumber *count in sizeCount) {
-		for (int i = 0; i < [count integerValue]; i++) {
-			// Create the Ships
-			BSShipController *aShip = [[BSShipController alloc] initWithType:BSShipType3];
+		// Create the Ships
+		BSShipController *aShip = [[BSShipController alloc] initWithType:[count intValue] tileSize:kTileSize];
 			
-			// Set the delegate to the playFieldController
-			aShip.delegate = playFieldController;
-
-			[theShips addObject:aShip];
-		}
-		j++;
+		// Set the delegate to the playFieldController
+		aShip.delegate = ownFieldController;
+		[theShips addObject:aShip];
 	}
 	
 	ships = [[NSArray arrayWithArray:theShips] retain];
@@ -54,6 +54,7 @@
 
 - (void)drawRect:(CGRect)rect {
 	[canvas addSubview:playFieldController.view];
+	[canvas addSubview:ownFieldController.view];
 	
 	for (BSShipController *aShip in ships) {
 		[canvas addSubview:aShip.view];

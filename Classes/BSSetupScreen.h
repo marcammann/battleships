@@ -15,6 +15,7 @@
 @interface BSSetupScreen : UIView {
 	NSArray *ships;
 	BSPlayFieldController *playFieldController;
+	BSPlayFieldController *ownFieldController;
 	
 	BSCanvasView *canvas;
 }

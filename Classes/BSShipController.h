@@ -29,7 +29,7 @@ typedef enum {
 - (BOOL)ship:(id)aShip shouldMoveToPoint:(CGPoint)aPoint;
 @end
 
-@interface BSShipController : UIViewController {
+@interface BSShipController : UIViewController <BSShipViewDelegate> {
 	// The Ship view
 	BSShipView *view;
 	
@@ -56,10 +56,13 @@ typedef enum {
 	
 	// The hits this ship has taken
 	NSMutableArray *hits;
+	
+	// How big is one tile
+	CGFloat tileSize;
 }
 
 // Initializer with the type
-- (id)initWithType:(BSShipType)type;
+- (id)initWithType:(BSShipType)type tileSize:(CGFloat)tileSize;
 
 // Returns a point with the tile position in the current play field
 - (CGPoint)positionInGrid;
@@ -81,7 +84,7 @@ typedef enum {
 @property (nonatomic, readwrite) BSShipOrientation orientation;
 @property (nonatomic, readwrite) BSShipType type;
 
-@property (nonatomic, retain) NSNumber *length;
+@property (nonatomic, readonly) NSNumber *length;
 
 @property (nonatomic, assign) id playFieldController;
 @property (nonatomic, assign) id delegate;

@@ -13,11 +13,10 @@
 
 @synthesize view;
 
-- (id)initWithTilenumber:(NSInteger)theTilesCount {
+- (id)initWithSize:(NSNumber *)theSize frame:(CGRect)aFrame {
 	if (self = [super init]) {
-		size = [NSNumber numberWithInt:theTilesCount];
-		self.view = [[BSPlayFieldView alloc] initWithTilenumber:[size integerValue]];
-		//self.view.center = CGPointMake(160.0f, 160.0f);
+		size = [theSize retain];
+		self.view = [[BSPlayFieldView alloc] initWithSize:size frame:aFrame];
 	}
 	
 	return self;
@@ -25,9 +24,11 @@
 
 - (CGPoint)gridpointForCoordinate:(CGPoint)aPoint {
 	CGPoint gridOffset = [self gridOffset];
-	CGPoint gridpoint = CGPointMake(round((aPoint.x - gridOffset.x) / kTileSize), round((aPoint.y - gridOffset.y) / kTileSize));
 	
-	NSLog(@"Gridp: %.2f / %.2f", gridpoint.x, gridpoint.y);
+	
+	CGPoint gridpoint = CGPointMake(round((aPoint.x - gridOffset.x) / self.view.tileSize), round((aPoint.y - gridOffset.y) / self.view.tileSize));
+	
+	//NSLog(@"Gridp: %.2f / %.2f", gridpoint.x, gridpoint.y);
 	
 	return gridpoint;
 	
@@ -35,7 +36,7 @@
 
 - (CGPoint)coordinateForGridpoint:(CGPoint)aPoint {
 	CGPoint gridOffset = [self gridOffset];
-	CGPoint coordinates = CGPointMake(gridOffset.x + (aPoint.x * kTileSize), gridOffset.y + (aPoint.y * kTileSize));
+	CGPoint coordinates = CGPointMake(gridOffset.x + (aPoint.x * self.view.tileSize), gridOffset.y + (aPoint.y * self.view.tileSize));
 	
 	return coordinates;
 }
@@ -58,6 +59,7 @@
 	BSShipController *theShip = (BSShipController *)aShip;
 	
 	if ([self gridpointForCoordinate:theShip.view.maxCoordinate].x > [size intValue] ||
+		[self gridpointForCoordinate:theShip.view.maxCoordinate].y > [size intValue] ||
 		[self gridpointForCoordinate:theShip.view.minCoordinate].x < 0 ||
 		[self gridpointForCoordinate:theShip.view.minCoordinate].y < 0) {
 		return aPoint;
@@ -69,7 +71,7 @@
 - (BOOL)ship:(id)aShip shouldMoveToPoint:(CGPoint)aPoint {
 	BSShipController *theShip = (BSShipController *)aShip;
 	
-	NSLog(@"Next Point: %.2f / %.2f", aPoint.x, aPoint.y);
+	//NSLog(@"Next Point: %.2f / %.2f", aPoint.x, aPoint.y);
 	
 	CGRect nextFrame = CGRectMake(theShip.view.minCoordinate.x + (aPoint.x - theShip.view.minCoordinate.x), theShip.view.minCoordinate.y + (aPoint.y - theShip.view.minCoordinate.y),
 									theShip.view.frame.size.width, theShip.view.frame.size.height);
@@ -78,7 +80,7 @@
 	
 	// Just check that the leftmost / rightmost point is still in the parentView
 	// And check that the topmost / lowermost point is still in the parentView
-	NSLog(@"Contained: %i", CGRectContainsRect([self.view superview].frame, nextFrame));
+	//NSLog(@"Contained: %i", CGRectContainsRect([self.view superview].frame, nextFrame));
 	if (CGRectContainsRect([self.view superview].frame, nextFrame)) {
 		return YES;
 	}

@@ -24,7 +24,7 @@
 }
 
 // Initializer with size
-- (id)initWithSize:(NSNumber *)size;
+- (id)initWithSize:(NSNumber *)size frame:(CGRect)aFrame;
 
 // Adds a ship to the field - and thus sets the delegate etc.
 - (void)addShip:(BSShipController *)aShip;
