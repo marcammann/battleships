@@ -27,6 +27,9 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = touches.anyObject;
+	
+	NSLog(@"touched");
+	
 	startTouchPosition = [touch locationInView:[self superview]];
 
 	dragPosition = self.frame.origin;	

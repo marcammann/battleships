@@ -18,7 +18,7 @@
     if (self = [super initWithFrame:frame]) {
 		canvas = [[BSCanvasView alloc] initWithFrame:frame];
 		
-		playFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(330.0f, 0.0f, 128.0f, 128.0f)];
+		playFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(342.0f, 0.0f, 128.0f, 128.0f)];
 		ownFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(0.0f, 0.0f, 320.0f, 320.0f)];
 		
 		[self createShips];
@@ -42,7 +42,7 @@
 	for (NSNumber *count in sizeCount) {
 		// Create the Ships
 		BSShipController *aShip = [[BSShipController alloc] initWithType:[count intValue] tileSize:kTileSize];
-			
+		
 		// Set the delegate to the playFieldController
 		aShip.delegate = ownFieldController;
 		[theShips addObject:aShip];
@@ -55,11 +55,24 @@
 - (void)drawRect:(CGRect)rect {
 	[canvas addSubview:playFieldController.view];
 	[canvas addSubview:ownFieldController.view];
+	//[playFieldController.view.layer setTransform:CATransform3DMakeScale(0.5f, 0.5f, 1.0f)];
+	
+	BSShipController *ship = [[BSShipController alloc] initWithType:BSShipType3 tileSize:12.0f];
+	ship.delegate = playFieldController;
+	//ship.view.center = CGPointMake(200.0f, 200.0f);
+	ship.position = CGPointMake(3, 4);
+	[ship setCoordinateToPosition];
 	
 	for (BSShipController *aShip in ships) {
 		[canvas addSubview:aShip.view];
-		aShip.view.center = CGPointMake(120.0f, 120.0f);
+		aShip.position = CGPointMake(2, 2);
+		//aShip.view.center = CGPointMake(120.0f, 120.0f);
+		[aShip setCoordinateToPosition];
 	}
+	
+	[canvas addSubview:ship.view];
+	
+	
 	
 	[self addSubview:canvas];
 }

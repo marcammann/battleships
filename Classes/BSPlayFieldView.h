@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BSPlayFieldView : UIView {
-	UIView *playField;
+	UIImageView *playField;
 	UIView *indexRow;
 	UIView *indexColumn;
 	
@@ -20,7 +20,7 @@
 	CGFloat tileSize;
 }
 
-@property (readonly) UIView *playField;
+@property (readonly) UIImageView *playField;
 @property (readonly) CGFloat tileSize;
 
 - (id)initWithSize:(NSNumber *)size frame:(CGRect)frame;

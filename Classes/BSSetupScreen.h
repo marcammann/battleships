@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import <QuartzCore/QuartzCore.h>
 #import "BSShipView.h"
 #import "BSPlayFieldView.h"
 #import "BSPlayFieldController.h"
