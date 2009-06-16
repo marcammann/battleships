@@ -14,6 +14,7 @@
 
 @synthesize playField;
 @synthesize tileSize;
+@synthesize controller;
 
 - (id)initWithSize:(NSNumber *)size frame:(CGRect)aFrame {
     if (self = [super initWithFrame:aFrame]) {
@@ -32,6 +33,17 @@
 		indexColumn.frame = CGRectMake(0.0f, indexBarSize, indexBarSize, playFieldSize);
     }
     return self;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = touches.anyObject;
+	
+	NSLog(@"field touched");
+	
+	if (touch.tapCount == 1) {
+		[controller fieldView:self tappedAt:[touch locationInView:[self superview]]];
+	} 
+	
 }
 
 - (void)drawRect:(CGRect)rect {

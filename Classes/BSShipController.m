@@ -27,6 +27,7 @@
 		tileSize = theTileSize;
 		type = theType;
 		view = [[BSShipView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tileSize, tileSize * [[NSNumber numberWithInt:type + 2] intValue]) controller:self];
+		orientation = BSShipOrientationVertical	;
 	}
 	
 	return self;
@@ -72,6 +73,11 @@
 - (void)setCoordinate:(CGPoint)aPoint animated:(BOOL)animated {
 	view.center = CGPointMake(view.center.x + (aPoint.x - view.minCoordinate.x), view.center.y + (aPoint.y - view.minCoordinate.y));
 	[delegate ship:self movedToPoint:aPoint];
+	CGPoint gridpoint = [delegate gridpointForCoordinate:view.minCoordinate];
+	if (gridpoint.x >= 0 && gridpoint.x < 10 && gridpoint.y >= 0 && gridpoint.y < 10) {
+		position = gridpoint;
+		NSLog(@"Position: %.2f / %.2f", position.x, position.y);
+	}
 }
 
 - (void)setCoordinateToPosition {
@@ -89,20 +95,22 @@
 		
 	CGAffineTransform oldTransform = view.transform;
 	
-	if (anOrientation == BSShipOrientationHorizontal) {
+	if (anOrientation == BSShipOrientationVertical) {
 		view.transform = CGAffineTransformIdentity;
 	} else {
 		CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2.0f);
 		view.transform = transform;
 	}
 	
-	if ([delegate ship:self shouldMoveToPoint:view.minCoordinate]) {
+	orientation = anOrientation;
+	
+	/*if ([delegate ship:self shouldMoveToPoint:view.minCoordinate]) {
 		CGPoint point = [delegate ship:self pointToMoveForPoint:view.frame.origin];
 		[self setCoordinate:point animated:NO];
 		orientation = anOrientation;
 	} else {
 		view.transform = oldTransform;
-	}
+	}*/
 	
 	
 	

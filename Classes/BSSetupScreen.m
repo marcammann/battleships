@@ -18,7 +18,7 @@
     if (self = [super initWithFrame:frame]) {
 		canvas = [[BSCanvasView alloc] initWithFrame:frame];
 		
-		playFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(342.0f, 0.0f, 128.0f, 128.0f)];
+		//playFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(342.0f, 0.0f, 128.0f, 128.0f)];
 		ownFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(0.0f, 0.0f, 320.0f, 320.0f)];
 		
 		[self createShips];
@@ -55,22 +55,46 @@
 - (void)drawRect:(CGRect)rect {
 	[canvas addSubview:playFieldController.view];
 	[canvas addSubview:ownFieldController.view];
-	//[playFieldController.view.layer setTransform:CATransform3DMakeScale(0.5f, 0.5f, 1.0f)];
 	
-	BSShipController *ship = [[BSShipController alloc] initWithType:BSShipType3 tileSize:12.0f];
-	ship.delegate = playFieldController;
-	//ship.view.center = CGPointMake(200.0f, 200.0f);
-	ship.position = CGPointMake(3, 4);
-	[ship setCoordinateToPosition];
 	
+	UInt32 i = 0;
 	for (BSShipController *aShip in ships) {
+		switch (i) {
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+				[aShip setOrientation:BSShipOrientationVertical];
+				[aShip setCoordinate:CGPointMake(325.0f + (i * 34.0f), 3 * 34.0f + 5.0f) animated:NO];
+				break;
+			case 4:
+			case 5:
+				[aShip setOrientation:BSShipOrientationHorizontal];
+				[aShip setCoordinate:CGPointMake(325.0f + 34.0f, 3 * 34.0f + 64.0f + ((i - 4) * 34.0f) + 5.0f) animated:NO];
+				break;
+			case 6:
+				[aShip setOrientation:BSShipOrientationVertical];
+				[aShip setCoordinate:CGPointMake(325.0f, 3 * 34.0f + 64.0f + 5.0f) animated:NO];
+				break;
+			case 7:
+			case 8:
+				[aShip setOrientation:BSShipOrientationHorizontal];
+				[aShip setCoordinate:CGPointMake(325.0f, (i - 6) * 34.0f + 5.0f) animated:NO];
+				break;
+			case 9:
+				[aShip setOrientation:BSShipOrientationHorizontal];
+				[aShip setCoordinate:CGPointMake(325.0f, 5.0f) animated:NO];
+				break;
+			default:
+				break;
+		}
+		
+		i++;
+		
 		[canvas addSubview:aShip.view];
-		aShip.position = CGPointMake(2, 2);
-		//aShip.view.center = CGPointMake(120.0f, 120.0f);
-		[aShip setCoordinateToPosition];
+//		[aShip setOrientation:BSShipOrientationVertical];
+//		[aShip setCoordinate:CGPointMake(340.0f, 20.0f + i*32.0f) animated:NO];
 	}
-	
-	[canvas addSubview:ship.view];
 	
 	
 	

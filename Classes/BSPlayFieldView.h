@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BSPlayFieldViewDelegate
+- (void)fieldView:(id)field tappedAt:(CGPoint)aPoint;
+@end
+
+
 @interface BSPlayFieldView : UIView {
 	UIImageView *playField;
 	UIView *indexRow;
 	UIView *indexColumn;
 	
-	id controller;
+	id<BSPlayFieldViewDelegate> controller;
 	
 	NSNumber *size;
 	
@@ -22,6 +27,7 @@
 
 @property (readonly) UIImageView *playField;
 @property (readonly) CGFloat tileSize;
+@property (nonatomic, assign) id controller;
 
 - (id)initWithSize:(NSNumber *)size frame:(CGRect)frame;
 
