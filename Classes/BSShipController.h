@@ -59,6 +59,9 @@ typedef enum {
 	
 	// How big is one tile
 	CGFloat tileSize;
+	
+	// The position in the grid
+	CGPoint position;
 }
 
 // Initializer with the type
@@ -89,5 +92,6 @@ typedef enum {
 @property (nonatomic, assign) id playFieldController;
 @property (nonatomic, assign) id delegate;
 
+@property (nonatomic, readwrite) CGPoint position;
 
 @end

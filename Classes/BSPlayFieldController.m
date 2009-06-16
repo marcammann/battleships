@@ -24,8 +24,6 @@
 
 - (CGPoint)gridpointForCoordinate:(CGPoint)aPoint {
 	CGPoint gridOffset = [self gridOffset];
-	
-	
 	CGPoint gridpoint = CGPointMake(round((aPoint.x - gridOffset.x) / self.view.tileSize), round((aPoint.y - gridOffset.y) / self.view.tileSize));
 	
 	//NSLog(@"Gridp: %.2f / %.2f", gridpoint.x, gridpoint.y);
@@ -36,7 +34,10 @@
 
 - (CGPoint)coordinateForGridpoint:(CGPoint)aPoint {
 	CGPoint gridOffset = [self gridOffset];
+	NSLog(@"Grid Offset: %.2f / %.2f", gridOffset.x, gridOffset.y);
 	CGPoint coordinates = CGPointMake(gridOffset.x + (aPoint.x * self.view.tileSize), gridOffset.y + (aPoint.y * self.view.tileSize));
+	
+	NSLog(@"%.2f / %.2f", coordinates.x, coordinates.y);
 	
 	return coordinates;
 }

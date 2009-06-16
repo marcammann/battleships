@@ -14,6 +14,9 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		491C23490FDABB8800EFCBA7 /* BSShipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491C23480FDABB8800EFCBA7 /* BSShipController.m */; };
+		49476F210FE6B65A0077713D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49476F200FE6B65A0077713D /* QuartzCore.framework */; };
+		49476F5B0FE6C05D0077713D /* playfieldBgPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */; };
+		49476F860FE6D05C0077713D /* playfieldBgSmallPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */; };
 		49A1E15B0F82C7C6003021C0 /* tile_bg_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */; };
 		49A1E1600F82C7DC003021C0 /* BSStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */; };
 		49A1E1610F82C7DC003021C0 /* BSPlayCPUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15F0F82C7DC003021C0 /* BSPlayCPUViewController.m */; };
@@ -36,6 +39,9 @@
 		32CA4F630368D1EE00C91783 /* Baddleships_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baddleships_Prefix.pch; sourceTree = "<group>"; };
 		491C23470FDABB8800EFCBA7 /* BSShipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSShipController.h; sourceTree = "<group>"; };
 		491C23480FDABB8800EFCBA7 /* BSShipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSShipController.m; sourceTree = "<group>"; };
+		49476F200FE6B65A0077713D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playfieldBgPlain.png; sourceTree = "<group>"; };
+		49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playfieldBgSmallPlain.png; sourceTree = "<group>"; };
 		49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tile_bg_paper.png; path = Classes/tile_bg_paper.png; sourceTree = "<group>"; };
 		49A1E15C0F82C7DC003021C0 /* BSStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStartViewController.h; sourceTree = "<group>"; };
 		49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSStartViewController.m; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				49476F210FE6B65A0077713D /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,10 +85,8 @@
 				49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */,
 				49A1E15E0F82C7DC003021C0 /* BSPlayCPUViewController.h */,
 				49A1E15F0F82C7DC003021C0 /* BSPlayCPUViewController.m */,
-				49A1E28E0F82EEC6003021C0 /* BSPlayFieldController.h */,
-				49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */,
-				491C23470FDABB8800EFCBA7 /* BSShipController.h */,
-				491C23480FDABB8800EFCBA7 /* BSShipController.m */,
+				49476FD10FE6DD4D0077713D /* Play Field */,
+				49476FD20FE6DD5F0077713D /* Ship */,
 				49A1E22B0F82E75B003021C0 /* Constants.h */,
 				49A1E1620F82C7E9003021C0 /* Views */,
 			);
@@ -99,6 +104,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */,
+				49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */,
 				49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -130,6 +137,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49476F200FE6B65A0077713D /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -137,13 +145,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		49A1E1620F82C7E9003021C0 /* Views */ = {
+		49476FD10FE6DD4D0077713D /* Play Field */ = {
 			isa = PBXGroup;
 			children = (
 				49A1E1630F82C7E9003021C0 /* BSPlayFieldView.h */,
 				49A1E1640F82C7E9003021C0 /* BSPlayFieldView.m */,
+				49A1E28E0F82EEC6003021C0 /* BSPlayFieldController.h */,
+				49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */,
+			);
+			name = "Play Field";
+			sourceTree = "<group>";
+		};
+		49476FD20FE6DD5F0077713D /* Ship */ = {
+			isa = PBXGroup;
+			children = (
 				49A1E1650F82C7E9003021C0 /* BSShipView.h */,
 				49A1E1660F82C7E9003021C0 /* BSShipView.m */,
+				491C23470FDABB8800EFCBA7 /* BSShipController.h */,
+				491C23480FDABB8800EFCBA7 /* BSShipController.m */,
+			);
+			name = Ship;
+			sourceTree = "<group>";
+		};
+		49A1E1620F82C7E9003021C0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				49A1E1670F82C7E9003021C0 /* BSSetupScreen.h */,
 				49A1E1680F82C7E9003021C0 /* BSSetupScreen.m */,
 				49A404530FE2F8F7004A7E10 /* BSCanvasView.h */,
@@ -196,6 +222,8 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				49A1E15B0F82C7C6003021C0 /* tile_bg_paper.png in Resources */,
+				49476F5B0FE6C05D0077713D /* playfieldBgPlain.png in Resources */,
+				49476F860FE6D05C0077713D /* playfieldBgSmallPlain.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

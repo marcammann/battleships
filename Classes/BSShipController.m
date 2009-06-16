@@ -7,7 +7,7 @@
 //
 
 #import "BSShipController.h"
-
+#import "BSPlayFieldController.h"
 #import "BSShipView.h"
 
 @implementation BSShipController
@@ -20,6 +20,7 @@
 @synthesize rotatable;
 @synthesize movable;
 @synthesize view;
+@synthesize position;
 
 - (id)initWithType:(BSShipType)theType tileSize:(CGFloat)theTileSize {
 	if (self = [super init]) {
@@ -69,8 +70,13 @@
 
 // Sets the leftupper point to somewhere else
 - (void)setCoordinate:(CGPoint)aPoint animated:(BOOL)animated {
-	view.center = CGPointMake(view.center.x + (aPoint.x - view.frame.origin.x), view.center.y + (aPoint.y - view.frame.origin.y));
+	view.center = CGPointMake(view.center.x + (aPoint.x - view.minCoordinate.x), view.center.y + (aPoint.y - view.minCoordinate.y));
 	[delegate ship:self movedToPoint:aPoint];
+}
+
+- (void)setCoordinateToPosition {
+	CGPoint coordinate = [(BSPlayFieldController *)delegate coordinateForGridpoint:position];
+	[self setCoordinate:coordinate animated:NO];
 }
 
 - (void)setType:(BSShipType)aType {
@@ -80,11 +86,10 @@
 }
 
 - (void)setOrientation:(BSShipOrientation)anOrientation {
-	orientation = anOrientation;
-	
+		
 	CGAffineTransform oldTransform = view.transform;
 	
-	if (orientation == BSShipOrientationHorizontal) {
+	if (anOrientation == BSShipOrientationHorizontal) {
 		view.transform = CGAffineTransformIdentity;
 	} else {
 		CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2.0f);
@@ -94,9 +99,12 @@
 	if ([delegate ship:self shouldMoveToPoint:view.minCoordinate]) {
 		CGPoint point = [delegate ship:self pointToMoveForPoint:view.frame.origin];
 		[self setCoordinate:point animated:NO];
+		orientation = anOrientation;
 	} else {
 		view.transform = oldTransform;
 	}
+	
+	
 	
 	[delegate ship:self rotatedToOrientation:orientation];
 }
