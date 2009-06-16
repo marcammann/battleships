@@ -27,23 +27,23 @@
 }
 
 - (void)createShips {
-	NSMutableArray *sizeCount = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], // Size 0
+	NSMutableArray *sizeCount = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0],
 								 [NSNumber numberWithInt:0],
 								 [NSNumber numberWithInt:0],
-								 [NSNumber numberWithInt:0], // Size 1 // Size 2
+								 [NSNumber numberWithInt:0],
 								 [NSNumber numberWithInt:1],
 								 [NSNumber numberWithInt:1],
 								 [NSNumber numberWithInt:1],
 								 [NSNumber numberWithInt:2],
 								 [NSNumber numberWithInt:2],
-								 [NSNumber numberWithInt:3], nil]; // Size 5
+								 [NSNumber numberWithInt:3], nil];
 	
 	NSMutableArray *theShips = [NSMutableArray array];
 	for (NSNumber *count in sizeCount) {
 		// Create the Ships
 		BSShipController *aShip = [[BSShipController alloc] initWithType:[count intValue] tileSize:kTileSize];
 			
-		// Set the delegate to the playFieldController
+		// Set the delegate to the playFieldControllerlin 
 		aShip.delegate = ownFieldController;
 		[theShips addObject:aShip];
 	}
