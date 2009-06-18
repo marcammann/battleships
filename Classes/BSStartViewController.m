@@ -46,7 +46,7 @@
 }
 
 - (void)loadCPUGame {
-	BSPlayCPUViewController *viewController = [[BSPlayCPUViewController alloc] init];
+	BSSetupCPUSkillViewController *viewController = [[BSSetupCPUSkillViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
 	[viewController release];
 }

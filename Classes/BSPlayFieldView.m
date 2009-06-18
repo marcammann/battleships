@@ -21,16 +21,6 @@
 		playField = [[UIImageView alloc] init];
 		indexRow = [[UIView alloc] init];
 		indexColumn = [[UIView alloc] init];
-		
-		CGFloat prop = self.frame.size.width / kTotalFieldSize;
-		tileSize = kTileSize * prop;
-		
-		CGFloat indexBarSize = (kTotalFieldSize - kPlayFieldSize) * prop;
-		CGFloat playFieldSize = kPlayFieldSize * prop;
-		playField.frame = CGRectMake(indexBarSize, indexBarSize, playFieldSize, playFieldSize);
-		
-		indexRow.frame = CGRectMake(indexBarSize, 0.0f, playFieldSize, indexBarSize);
-		indexColumn.frame = CGRectMake(0.0f, indexBarSize, indexBarSize, playFieldSize);
     }
     return self;
 }
@@ -47,8 +37,17 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-	// Get the basic proportions
 	CGFloat prop = self.frame.size.width / kTotalFieldSize;
+	tileSize = kTileSize * prop;
+	
+	CGFloat indexBarSize = (kTotalFieldSize - kPlayFieldSize) * prop;
+	CGFloat playFieldSize = kPlayFieldSize * prop;
+	playField.frame = CGRectMake(indexBarSize, indexBarSize, playFieldSize, playFieldSize);
+	
+	indexRow.frame = CGRectMake(indexBarSize, 0.0f, playFieldSize, indexBarSize);
+	indexColumn.frame = CGRectMake(0.0f, indexBarSize, indexBarSize, playFieldSize);
+	
+	// Get the basic proportions
 	
 	if (CGRectGetWidth(self.frame) == 128.0f) {
 		playField.image = [UIImage imageNamed:@"playfieldBgSmallPlain.png"];

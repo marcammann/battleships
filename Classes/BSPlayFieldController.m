@@ -14,15 +14,19 @@
 @synthesize view;
 @synthesize delegate;
 
-- (id)initWithSize:(NSNumber *)theSize frame:(CGRect)aFrame {
+- (id)initWithSize:(NSNumber *)theSize {
 	if (self = [super init]) {
 		size = [theSize retain];
-		self.view = [[BSPlayFieldView alloc] initWithSize:size frame:aFrame];
-		self.view.controller = self;
+		view = [[BSPlayFieldView alloc] initWithSize:size frame:CGRectMake(0.0f, 0.0f, 320.0f, 320.0f)];
+		view.controller = self;
 		ships = [[NSMutableArray array] retain];
 	}
 	
 	return self;
+}
+
+- (void)loadView {
+	[super loadView];
 }
 
 - (CGPoint)gridpointForCoordinate:(CGPoint)aPoint {
@@ -81,10 +85,10 @@
 }
 
 - (BOOL)isShipInGrid:(BSShipController *)theShip {	
-	if ([self gridpointForCoordinate:theShip.view.maxCoordinate].x > [size intValue] ||
-		[self gridpointForCoordinate:theShip.view.maxCoordinate].y > [size intValue] ||
-		[self gridpointForCoordinate:theShip.view.minCoordinate].x < 0 ||
-		[self gridpointForCoordinate:theShip.view.minCoordinate].y < 0) {
+	if ([self gridpointForCoordinate:theShip.shipView.maxCoordinate].x > [size intValue] ||
+		[self gridpointForCoordinate:theShip.shipView.maxCoordinate].y > [size intValue] ||
+		[self gridpointForCoordinate:theShip.shipView.minCoordinate].x < 0 ||
+		[self gridpointForCoordinate:theShip.shipView.minCoordinate].y < 0) {
 		return NO;
 	}
 	
@@ -140,12 +144,12 @@
 - (CGPoint)ship:(id)aShip pointToMoveForPoint:(CGPoint)aPoint {	
 	BSShipController *theShip = (BSShipController *)aShip;
 	
-	NSLog(@"%.2f", theShip.view.maxCoordinate.x);
+	NSLog(@"%.2f", theShip.shipView.maxCoordinate.x);
 	
-	if ([self gridpointForCoordinate:theShip.view.maxCoordinate].x > [size intValue] ||
-		[self gridpointForCoordinate:theShip.view.maxCoordinate].y > [size intValue] ||
-		[self gridpointForCoordinate:theShip.view.minCoordinate].x < 0 ||
-		[self gridpointForCoordinate:theShip.view.minCoordinate].y < 0) {
+	if ([self gridpointForCoordinate:theShip.shipView.maxCoordinate].x > [size intValue] ||
+		[self gridpointForCoordinate:theShip.shipView.maxCoordinate].y > [size intValue] ||
+		[self gridpointForCoordinate:theShip.shipView.minCoordinate].x < 0 ||
+		[self gridpointForCoordinate:theShip.shipView.minCoordinate].y < 0) {
 		return aPoint;
 	}
 	
@@ -157,8 +161,8 @@
 	
 	//NSLog(@"Next Point: %.2f / %.2f", aPoint.x, aPoint.y);
 	
-	CGRect nextFrame = CGRectMake(theShip.view.minCoordinate.x + (aPoint.x - theShip.view.minCoordinate.x), theShip.view.minCoordinate.y + (aPoint.y - theShip.view.minCoordinate.y),
-									theShip.view.frame.size.width, theShip.view.frame.size.height);
+	CGRect nextFrame = CGRectMake(theShip.shipView.minCoordinate.x + (aPoint.x - theShip.shipView.minCoordinate.x), theShip.shipView.minCoordinate.y + (aPoint.y - theShip.shipView.minCoordinate.y),
+									theShip.shipView.frame.size.width, theShip.shipView.frame.size.height);
 	
 	NSLog(@"%.2f / %.2f | %.2f / %.2f", CGRectGetMinX(nextFrame), CGRectGetMinY(nextFrame), CGRectGetMaxX(nextFrame), CGRectGetMaxY(nextFrame));
 	

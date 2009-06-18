@@ -29,6 +29,6 @@
 @property (readonly) CGFloat tileSize;
 @property (nonatomic, assign) id controller;
 
-- (id)initWithSize:(NSNumber *)size frame:(CGRect)frame;
+- (id)initWithSize:(NSNumber *)size;
 
 @end

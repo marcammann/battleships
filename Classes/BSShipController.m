@@ -19,15 +19,17 @@
 @synthesize delegate;
 @synthesize rotatable;
 @synthesize movable;
-@synthesize view;
+@synthesize shipView;
 @synthesize position;
+@synthesize tileSize;
 
-- (id)initWithType:(BSShipType)theType tileSize:(CGFloat)theTileSize {
+- (id)initWithType:(BSShipType)theType {
 	if (self = [super init]) {
-		tileSize = theTileSize;
 		type = theType;
-		view = [[BSShipView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tileSize, tileSize * [[NSNumber numberWithInt:type + 2] intValue]) controller:self];
-		orientation = BSShipOrientationVertical	;
+		orientation = BSShipOrientationVertical;
+		tileSize = 30.0f;
+		
+		self.shipView = [[BSShipView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tileSize, tileSize * [[NSNumber numberWithInt:type + 2] intValue]) controller:self];
 	}
 	
 	return self;
@@ -36,12 +38,15 @@
 - (void)dealloc {
 	[length release];
 	length = nil;
-	[view release];
+	[shipView release];
 	
 	[super dealloc];
 }
 
 - (void)loadView {
+	[super loadView];
+	self.view = shipView;
+	//[self.view addSubview:shipView];
 }
 
 
@@ -71,9 +76,9 @@
 
 // Sets the leftupper point to somewhere else
 - (void)setCoordinate:(CGPoint)aPoint animated:(BOOL)animated {
-	view.center = CGPointMake(view.center.x + (aPoint.x - view.minCoordinate.x), view.center.y + (aPoint.y - view.minCoordinate.y));
+	shipView.center = CGPointMake(shipView.center.x + (aPoint.x - shipView.minCoordinate.x), shipView.center.y + (aPoint.y - shipView.minCoordinate.y));
 	[delegate ship:self movedToPoint:aPoint];
-	CGPoint gridpoint = [delegate gridpointForCoordinate:view.minCoordinate];
+	CGPoint gridpoint = [delegate gridpointForCoordinate:shipView.minCoordinate];
 	if (gridpoint.x >= 0 && gridpoint.x < 10 && gridpoint.y >= 0 && gridpoint.y < 10) {
 		position = gridpoint;
 		NSLog(@"Position: %.2f / %.2f", position.x, position.y);
@@ -93,13 +98,13 @@
 
 - (void)setOrientation:(BSShipOrientation)anOrientation {
 		
-	CGAffineTransform oldTransform = view.transform;
+	CGAffineTransform oldTransform = shipView.transform;
 	
 	if (anOrientation == BSShipOrientationVertical) {
-		view.transform = CGAffineTransformIdentity;
+		shipView.transform = CGAffineTransformIdentity;
 	} else {
 		CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2.0f);
-		view.transform = transform;
+		shipView.transform = transform;
 	}
 	
 	orientation = anOrientation;

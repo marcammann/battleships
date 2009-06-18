@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BSPlayCPUViewController.h"
+#import "BSSetupCPUViewController.h"
+#import "BSSetupCPUSkillViewController.h"
 
 @interface BSStartViewController : UIViewController {
 	UIButton *vsCpuButton;

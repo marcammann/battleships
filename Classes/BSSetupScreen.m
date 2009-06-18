@@ -107,7 +107,7 @@
 		
 		i++;
 		
-		[canvas addSubview:aShip.view];
+		[canvas addSubview:aShip.shipView];
 //		[aShip setOrientation:BSShipOrientationVertical];
 //		[aShip setCoordinate:CGPointMake(340.0f, 20.0f + i*32.0f) animated:NO];
 	}
