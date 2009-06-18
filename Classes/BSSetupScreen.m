@@ -10,9 +10,9 @@
 #import "Constants.h"
 
 #import "BSShipController.h"
+#import "BSPlayScreen.h"
 
 @implementation BSSetupScreen
-
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -20,11 +20,29 @@
 		
 		//playFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(342.0f, 0.0f, 128.0f, 128.0f)];
 		ownFieldController = [[BSPlayFieldController alloc] initWithSize:[NSNumber numberWithInt:10] frame:CGRectMake(0.0f, 0.0f, 320.0f, 320.0f)];
+		ownFieldController.delegate = self;
 		
+		helpButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+		[helpButton setTitle:@"?" forState:UIControlStateNormal];
+		
+		continueButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+		[continueButton setTitle:@"OK" forState:UIControlStateNormal];
+		[continueButton setEnabled:NO];
+		[continueButton addTarget:self action:@selector(openPlayScreen) forControlEvents:UIControlEventTouchUpInside];
 		[self createShips];
     }
     return self;
 }
+
+
+- (void)openPlayScreen {
+	BSPlayScreen *playScreen = [[BSPlayScreen alloc] initWithFrame:self.frame];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
 
 - (void)createShips {
 	NSMutableArray *sizeCount = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0],
@@ -43,8 +61,8 @@
 		// Create the Ships
 		BSShipController *aShip = [[BSShipController alloc] initWithType:[count intValue] tileSize:kTileSize];
 		
+		[ownFieldController addShip:aShip];
 		// Set the delegate to the playFieldController
-		aShip.delegate = ownFieldController;
 		[theShips addObject:aShip];
 	}
 	
@@ -53,10 +71,8 @@
 
 
 - (void)drawRect:(CGRect)rect {
-	[canvas addSubview:playFieldController.view];
+	//[canvas addSubview:playFieldController.view];
 	[canvas addSubview:ownFieldController.view];
-	
-	
 	UInt32 i = 0;
 	for (BSShipController *aShip in ships) {
 		switch (i) {
@@ -99,8 +115,19 @@
 	
 	
 	[self addSubview:canvas];
+	
+	continueButton.frame = CGRectMake(370.0f, 275.0f, 40.0f, 40.0f);
+	[self addSubview:continueButton];
+	
+	helpButton.frame = CGRectMake(325.0f, 275.0f, 40.0f, 40.0f);
+	[self addSubview:helpButton];
 }
 
+# pragma mark BSPlayFieldDelegate Methods
+
+- (void)playField:(id)field allShipsInField:(BOOL)inField {
+	[continueButton setEnabled:inField];
+}
 
 - (void)dealloc {
     [super dealloc];

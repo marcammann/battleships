@@ -12,7 +12,19 @@
 
 #import "Constants.h"
 
+@protocol BSPlayFieldDisplayDelegate
+- (void)playField:(id)field allShipsInField:(BOOL)inField;
+@end
+
+@protocol BSPlayFieldInteractionDelegate
+- (void)playField:(id)aField tappedAt:(CGPoint)aPoint;
+@end
+
+
 @interface BSPlayFieldController : UIViewController <BSShipDelegate, BSPlayFieldViewDelegate> {
+	// The delegate to send actions to
+	id<BSPlayFieldDisplayDelegate> delegate;
+	
 	// Size of the Field in number of tiles
 	NSNumber *size;
 	
@@ -24,9 +36,6 @@
 	
 	// If the Field is Touch Enabled (to mark a field)
 	BOOL touchEnabled;
-	
-	// If all ships are placed
-	BOOL allShipsPlaced;
 }
 
 // Initializer with size
@@ -53,10 +62,22 @@
 // Sets a tile in the field as marked
 - (void)setTileMarked:(CGPoint)tile;
 
+// Checks if a gridpoint is really in the grid
+- (BOOL)gridpointInGrid:(CGPoint)gridpoint;
+
+// Checks if a coordinate is on the grid
+- (BOOL)coordinateInGrid:(CGPoint)coordinate;
+
+// Checks if a ship is fully on the grid
+- (BOOL)isShipInGrid:(BSShipController *)theShip;
+
+// Checks if all ships are in the grid
+- (BOOL)shipsInGrid;
+
+@property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) NSNumber *size;
 @property (nonatomic, readonly) NSMutableArray *ships;
 @property (nonatomic, retain) BSPlayFieldView *view;
 @property (readwrite) BOOL touchEnabled;
-@property (readonly) BOOL allShipsPlaced;
 
 @end

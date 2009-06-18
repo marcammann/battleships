@@ -12,12 +12,14 @@
 @implementation BSPlayFieldController
 
 @synthesize view;
+@synthesize delegate;
 
 - (id)initWithSize:(NSNumber *)theSize frame:(CGRect)aFrame {
 	if (self = [super init]) {
 		size = [theSize retain];
 		self.view = [[BSPlayFieldView alloc] initWithSize:size frame:aFrame];
 		self.view.controller = self;
+		ships = [[NSMutableArray array] retain];
 	}
 	
 	return self;
@@ -61,6 +63,59 @@
 	[self.view addSubview:overlay];
 }
 
+// Checks if a gridpoint is really in the grid
+- (BOOL)gridpointInGrid:(CGPoint)gridpoint {
+	if (gridpoint.x > [size intValue] ||
+		gridpoint.y > [size intValue] ||
+		gridpoint.x < 0 ||
+		gridpoint.y < 0) {
+		return NO;
+	}
+	
+	return YES;
+}
+
+// Checks if a coordinate is on the grid
+- (BOOL)coordinateInGrid:(CGPoint)coordinate {
+	return [self gridpointInGrid:[self gridpointForCoordinate:coordinate]];
+}
+
+- (BOOL)isShipInGrid:(BSShipController *)theShip {	
+	if ([self gridpointForCoordinate:theShip.view.maxCoordinate].x > [size intValue] ||
+		[self gridpointForCoordinate:theShip.view.maxCoordinate].y > [size intValue] ||
+		[self gridpointForCoordinate:theShip.view.minCoordinate].x < 0 ||
+		[self gridpointForCoordinate:theShip.view.minCoordinate].y < 0) {
+		return NO;
+	}
+	
+	return YES;
+}
+
+// Adds a ship to the field - and thus sets the delegate etc.
+- (void)addShip:(BSShipController *)aShip {
+	[ships addObject:[aShip retain]];
+	aShip.delegate = self;
+	aShip.playFieldController = self;
+}
+
+- (BOOL)shipsInGrid {
+	if ([ships count] == 0) {
+		[delegate playField:self allShipsInField:NO];
+		return NO;
+	}
+		
+	
+	for (BSShipController *ship in ships) {
+		if (![self isShipInGrid:ship]) {
+			[delegate playField:self allShipsInField:NO];
+			return NO;
+		}
+	}
+	
+	[delegate playField:self allShipsInField:YES];
+	return YES;
+}
+
 # pragma mark BSPlayFieldViewDelegate Methods
 
 - (void)fieldView:(id)field tappedAt:(CGPoint)aPoint {
@@ -72,10 +127,10 @@
 	[self setTileMarked:tile];
 }
 
-# pragma mark BSShipViewDelegate Methods
+# pragma mark BSShipDelegate Methods
 
 - (void)ship:(id)aShip movedToPoint:(CGPoint)aPoint {
-	
+	[self shipsInGrid];
 }
 
 - (void)ship:(id)aShip rotatedToOrientation:(BSShipOrientation)anOrientation {
@@ -84,6 +139,8 @@
 
 - (CGPoint)ship:(id)aShip pointToMoveForPoint:(CGPoint)aPoint {	
 	BSShipController *theShip = (BSShipController *)aShip;
+	
+	NSLog(@"%.2f", theShip.view.maxCoordinate.x);
 	
 	if ([self gridpointForCoordinate:theShip.view.maxCoordinate].x > [size intValue] ||
 		[self gridpointForCoordinate:theShip.view.maxCoordinate].y > [size intValue] ||

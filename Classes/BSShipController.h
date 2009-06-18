@@ -27,6 +27,7 @@ typedef enum {
 - (void)ship:(id)aShip rotatedToOrientation:(BSShipOrientation)anOrientation;
 - (CGPoint)ship:(id)aShip pointToMoveForPoint:(CGPoint)aPoint;
 - (BOOL)ship:(id)aShip shouldMoveToPoint:(CGPoint)aPoint;
+- (BOOL)isShipInGrid:(id)aShip;
 @end
 
 @interface BSShipController : UIViewController <BSShipViewDelegate> {

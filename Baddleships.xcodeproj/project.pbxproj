@@ -14,9 +14,12 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		491C23490FDABB8800EFCBA7 /* BSShipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491C23480FDABB8800EFCBA7 /* BSShipController.m */; };
+		492C5BBA0FE7E606000D3DF4 /* BSPlayScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 492C5BB90FE7E606000D3DF4 /* BSPlayScreen.m */; };
 		49476F210FE6B65A0077713D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49476F200FE6B65A0077713D /* QuartzCore.framework */; };
 		49476F5B0FE6C05D0077713D /* playfieldBgPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */; };
 		49476F860FE6D05C0077713D /* playfieldBgSmallPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */; };
+		496B0E950FEA3E1800D2EA39 /* BSPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0E940FEA3E1800D2EA39 /* BSPlayerController.m */; };
+		496B0EC10FEA44F500D2EA39 /* BSGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0EC00FEA44F500D2EA39 /* BSGameController.m */; };
 		49A1E15B0F82C7C6003021C0 /* tile_bg_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */; };
 		49A1E1600F82C7DC003021C0 /* BSStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */; };
 		49A1E1610F82C7DC003021C0 /* BSPlayCPUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15F0F82C7DC003021C0 /* BSPlayCPUViewController.m */; };
@@ -39,9 +42,15 @@
 		32CA4F630368D1EE00C91783 /* Baddleships_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baddleships_Prefix.pch; sourceTree = "<group>"; };
 		491C23470FDABB8800EFCBA7 /* BSShipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSShipController.h; sourceTree = "<group>"; };
 		491C23480FDABB8800EFCBA7 /* BSShipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSShipController.m; sourceTree = "<group>"; };
+		492C5BB80FE7E606000D3DF4 /* BSPlayScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayScreen.h; sourceTree = "<group>"; };
+		492C5BB90FE7E606000D3DF4 /* BSPlayScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayScreen.m; sourceTree = "<group>"; };
 		49476F200FE6B65A0077713D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playfieldBgPlain.png; sourceTree = "<group>"; };
 		49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playfieldBgSmallPlain.png; sourceTree = "<group>"; };
+		496B0E930FEA3E1800D2EA39 /* BSPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayerController.h; sourceTree = "<group>"; };
+		496B0E940FEA3E1800D2EA39 /* BSPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayerController.m; sourceTree = "<group>"; };
+		496B0EBF0FEA44F500D2EA39 /* BSGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGameController.h; sourceTree = "<group>"; };
+		496B0EC00FEA44F500D2EA39 /* BSGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSGameController.m; sourceTree = "<group>"; };
 		49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tile_bg_paper.png; path = Classes/tile_bg_paper.png; sourceTree = "<group>"; };
 		49A1E15C0F82C7DC003021C0 /* BSStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStartViewController.h; sourceTree = "<group>"; };
 		49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSStartViewController.m; sourceTree = "<group>"; };
@@ -85,6 +94,8 @@
 				49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */,
 				49A1E15E0F82C7DC003021C0 /* BSPlayCPUViewController.h */,
 				49A1E15F0F82C7DC003021C0 /* BSPlayCPUViewController.m */,
+				496B0EC20FEA44FA00D2EA39 /* Game */,
+				496B0EAD0FEA438200D2EA39 /* Player */,
 				49476FD10FE6DD4D0077713D /* Play Field */,
 				49476FD20FE6DD5F0077713D /* Ship */,
 				49A1E22B0F82E75B003021C0 /* Constants.h */,
@@ -167,6 +178,24 @@
 			name = Ship;
 			sourceTree = "<group>";
 		};
+		496B0EAD0FEA438200D2EA39 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				496B0E930FEA3E1800D2EA39 /* BSPlayerController.h */,
+				496B0E940FEA3E1800D2EA39 /* BSPlayerController.m */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		496B0EC20FEA44FA00D2EA39 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				496B0EBF0FEA44F500D2EA39 /* BSGameController.h */,
+				496B0EC00FEA44F500D2EA39 /* BSGameController.m */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
 		49A1E1620F82C7E9003021C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +203,8 @@
 				49A1E1680F82C7E9003021C0 /* BSSetupScreen.m */,
 				49A404530FE2F8F7004A7E10 /* BSCanvasView.h */,
 				49A404540FE2F8F7004A7E10 /* BSCanvasView.m */,
+				492C5BB80FE7E606000D3DF4 /* BSPlayScreen.h */,
+				492C5BB90FE7E606000D3DF4 /* BSPlayScreen.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -244,6 +275,9 @@
 				49A1E2900F82EEC6003021C0 /* BSPlayFieldController.m in Sources */,
 				491C23490FDABB8800EFCBA7 /* BSShipController.m in Sources */,
 				49A404550FE2F8F7004A7E10 /* BSCanvasView.m in Sources */,
+				492C5BBA0FE7E606000D3DF4 /* BSPlayScreen.m in Sources */,
+				496B0E950FEA3E1800D2EA39 /* BSPlayerController.m in Sources */,
+				496B0EC10FEA44F500D2EA39 /* BSGameController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
