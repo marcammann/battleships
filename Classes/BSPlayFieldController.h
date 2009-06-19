@@ -17,13 +17,18 @@
 @end
 
 @protocol BSPlayFieldInteractionDelegate
+@optional
 - (void)playField:(id)aField tappedAt:(CGPoint)aPoint;
+- (void)playField:(id)aField ship:(BSShipController *)aShip movedToPoint:(CGPoint)coordinate;
 @end
 
 
 @interface BSPlayFieldController : UIViewController <BSShipDelegate, BSPlayFieldViewDelegate> {
 	// The delegate to send actions to
 	id<BSPlayFieldDisplayDelegate> delegate;
+	
+	// The delegate that receives ships moving around etc.
+	id<BSPlayFieldInteractionDelegate> interactionDelegate;
 	
 	// Size of the Field in number of tiles
 	NSNumber *size;
@@ -75,6 +80,7 @@
 - (BOOL)shipsInGrid;
 
 @property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) id interactionDelegate;
 @property (nonatomic, retain) NSNumber *size;
 @property (nonatomic, readonly) NSMutableArray *ships;
 @property (nonatomic, retain) BSPlayFieldView *view;

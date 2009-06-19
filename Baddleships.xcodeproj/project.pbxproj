@@ -39,6 +39,7 @@
 		496B10160FEA68CD00D2EA39 /* UIColor-SQLitePersistentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0F410FEA68CC00D2EA39 /* UIColor-SQLitePersistentObject.m */; };
 		496B10170FEA68CD00D2EA39 /* UIImage-SQLitePersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0F430FEA68CC00D2EA39 /* UIImage-SQLitePersistence.m */; };
 		496B10B00FEA69C400D2EA39 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B10AF0FEA69C400D2EA39 /* libsqlite3.dylib */; };
+		496B13300FEBC35500D2EA39 /* BSPlayCPUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B132F0FEBC35500D2EA39 /* BSPlayCPUViewController.m */; };
 		49A1E15B0F82C7C6003021C0 /* tile_bg_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */; };
 		49A1E1600F82C7DC003021C0 /* BSStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */; };
 		49A1E1610F82C7DC003021C0 /* BSSetupCPUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15F0F82C7DC003021C0 /* BSSetupCPUViewController.m */; };
@@ -107,6 +108,8 @@
 		496B0F420FEA68CC00D2EA39 /* UIImage-SQLitePersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-SQLitePersistence.h"; sourceTree = "<group>"; };
 		496B0F430FEA68CC00D2EA39 /* UIImage-SQLitePersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-SQLitePersistence.m"; sourceTree = "<group>"; };
 		496B10AF0FEA69C400D2EA39 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		496B132E0FEBC35500D2EA39 /* BSPlayCPUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayCPUViewController.h; sourceTree = "<group>"; };
+		496B132F0FEBC35500D2EA39 /* BSPlayCPUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayCPUViewController.m; sourceTree = "<group>"; };
 		49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tile_bg_paper.png; path = Classes/tile_bg_paper.png; sourceTree = "<group>"; };
 		49A1E15C0F82C7DC003021C0 /* BSStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStartViewController.h; sourceTree = "<group>"; };
 		49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSStartViewController.m; sourceTree = "<group>"; };
@@ -276,6 +279,8 @@
 				49A1E15F0F82C7DC003021C0 /* BSSetupCPUViewController.m */,
 				496B0F050FEA679300D2EA39 /* BSSetupCPUSkillViewController.h */,
 				496B0F060FEA679300D2EA39 /* BSSetupCPUSkillViewController.m */,
+				496B132E0FEBC35500D2EA39 /* BSPlayCPUViewController.h */,
+				496B132F0FEBC35500D2EA39 /* BSPlayCPUViewController.m */,
 			);
 			name = CPU;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				496B10150FEA68CD00D2EA39 /* SQLitePersistentObject.m in Sources */,
 				496B10160FEA68CD00D2EA39 /* UIColor-SQLitePersistentObject.m in Sources */,
 				496B10170FEA68CD00D2EA39 /* UIImage-SQLitePersistence.m in Sources */,
+				496B13300FEBC35500D2EA39 /* BSPlayCPUViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

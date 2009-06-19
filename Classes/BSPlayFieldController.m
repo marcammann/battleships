@@ -13,6 +13,8 @@
 
 @synthesize view;
 @synthesize delegate;
+@synthesize interactionDelegate;
+
 
 - (id)initWithSize:(NSNumber *)theSize {
 	if (self = [super init]) {
@@ -135,6 +137,8 @@
 
 - (void)ship:(id)aShip movedToPoint:(CGPoint)aPoint {
 	[self shipsInGrid];
+	
+	[interactionDelegate playField:self ship:aShip movedToPoint:aPoint];
 }
 
 - (void)ship:(id)aShip rotatedToOrientation:(BSShipOrientation)anOrientation {

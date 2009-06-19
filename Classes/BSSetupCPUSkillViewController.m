@@ -15,9 +15,11 @@
 	if (self = [super init]) {
 		beginnerButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
 		beginnerButton.frame = CGRectMake(0.0f, 0.0f, 250.0f, 40.0f);
+		[beginnerButton setTitle:@"Beginner" forState:UIControlStateNormal];
 		
 		advancedButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
 		advancedButton.frame = CGRectMake(0.0f, 0.0f, 250.0f, 40.0f);
+		[advancedButton setTitle:@"Advanced" forState:UIControlStateNormal];
 		
 		[beginnerButton addTarget:self action:@selector(skillSelected:) forControlEvents:UIControlEventTouchUpInside];
 		[advancedButton addTarget:self action:@selector(skillSelected:) forControlEvents:UIControlEventTouchUpInside];

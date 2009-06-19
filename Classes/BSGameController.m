@@ -11,4 +11,6 @@
 
 @implementation BSGameController
 
+@synthesize players, shots;
+
 @end

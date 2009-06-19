@@ -21,6 +21,9 @@
 }
 
 @property (readonly, getter=winner) BSPlayerController *winner; 
+@property (nonatomic, readonly) NSMutableArray *players;
+@property (nonatomic, readonly) NSMutableArray *shots;
+
 
 // Check if the game has a winner
 - (BOOL)hasWinner;
