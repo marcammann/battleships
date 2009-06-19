@@ -17,4 +17,6 @@
 
 #define kTapDelay 0.2
 
+#define kPlayFieldNumberOfTiles 10
+
 #endif
