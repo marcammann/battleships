@@ -35,7 +35,10 @@
 	BSPlayFieldView *view;
 	
 	// If the Field is Touch Enabled (to mark a field)
-	BOOL touchEnabled;
+	BOOL touchEnabled;	
+	
+	// Array containing random located ships
+	NSArray *randomShips;
 }
 
 // Initializer with size
@@ -74,10 +77,18 @@
 // Checks if all ships are in the grid
 - (BOOL)shipsInGrid;
 
+// Creates random coordinates for ships in the play field
+- (CGPoint)generateRandonCoordinates;
+
+// Creates random positions for sips on the play field 
+- (void)createRandomPlayField:(NSArray *)ships;
+
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) NSNumber *size;
 @property (nonatomic, readonly) NSMutableArray *ships;
 @property (nonatomic, retain) BSPlayFieldView *view;
 @property (readwrite) BOOL touchEnabled;
+
+@property (nonatomic, readonly) NSArray *randomShips;
 
 @end

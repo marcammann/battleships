@@ -30,6 +30,7 @@
 		[continueButton setEnabled:NO];
 		[continueButton addTarget:self action:@selector(openPlayScreen) forControlEvents:UIControlEventTouchUpInside];
 		[self createShips];
+		[ownFieldController createRandomPlayField:ships];
     }
     return self;
 }
@@ -68,7 +69,6 @@
 	
 	ships = [[NSArray arrayWithArray:theShips] retain];
 }
-
 
 - (void)drawRect:(CGRect)rect {
 	//[canvas addSubview:playFieldController.view];
@@ -122,6 +122,19 @@
 	helpButton.frame = CGRectMake(325.0f, 275.0f, 40.0f, 40.0f);
 	[self addSubview:helpButton];
 }
+
+/*
+// For test random ships
+- (void)drawRect:(CGRect)rect {
+	//[canvas addSubview:playFieldController.view];
+	[canvas addSubview:ownFieldController.view];
+	
+	for (BSShipController *aShip in ownFieldController.randomShips) {
+		[canvas addSubview:aShip.view];
+	}
+	[self addSubview:canvas];
+}	
+*/
 
 # pragma mark BSPlayFieldDelegate Methods
 

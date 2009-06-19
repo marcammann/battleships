@@ -13,6 +13,7 @@
 
 @synthesize view;
 @synthesize delegate;
+@synthesize randomShips;
 
 - (id)initWithSize:(NSNumber *)theSize {
 	if (self = [super init]) {
@@ -174,6 +175,73 @@
 	}
 	
 	return NO;
+}
+
+# pragma mark RandomPlayField methods
+
+- (CGPoint)generateRandonCoordinates {
+	// Create random coordinates (inside the play field!)
+	CGPoint originPoint = CGPointMake((1 + arc4random()) % kPlayFieldNumberOfTiles, (1 + arc4random()) % kPlayFieldNumberOfTiles);	
+	return originPoint;
+}
+
+- (void)createRandomPlayField:(NSArray *)theShips  {
+	UInt32 shipsCount = 0;
+	NSMutableArray *candidateShips = [[NSMutableArray alloc] init];
+
+	for (BSShipController *aShip in theShips) {
+		// Create random coordenates for the ships (inside the play field!)
+		CGPoint randomOrigin = CGPointMake((1 + arc4random()) % kPlayFieldNumberOfTiles, (1 + arc4random()) % kPlayFieldNumberOfTiles);	
+		CGPoint randomEnd = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(randomOrigin.x + [aShip.length integerValue], randomOrigin.y) : CGPointMake(randomOrigin.x, randomOrigin.y + [aShip.length integerValue]);
+
+		// We always want first ship 
+		if (shipsCount == 0) {
+			[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
+			[candidateShips addObject:aShip];
+
+			shipsCount++;
+		}
+		else {
+			while (randomEnd.x > kPlayFieldNumberOfTiles  || randomEnd.y > kPlayFieldNumberOfTiles) {
+				randomOrigin = CGPointMake((1 + arc4random()) % kPlayFieldNumberOfTiles, (1 + arc4random()) % kPlayFieldNumberOfTiles);
+				randomEnd = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(randomOrigin.x + [aShip.length integerValue], randomOrigin.y) : CGPointMake(randomOrigin.x, randomOrigin.y + [aShip.length integerValue]);
+				
+				for (BSShipController *otherShip in candidateShips) {
+					while (randomOrigin.x > (otherShip.position.x - 1) || // New origin is not before where otherShip starts
+						   randomOrigin.x < (otherShip.position.x + [aShip.length integerValue] + 1) || // New origin is not after where otherShip ends
+						   randomOrigin.y < (otherShip.position.y + 1) || // New origin is not above where otherShip starts
+						   randomOrigin.y > (otherShip.position.y - 1) )  // New origin is not below where otherShip starts
+					{	
+						randomOrigin = CGPointMake((1 + arc4random()) % kPlayFieldNumberOfTiles, (1 + arc4random()) % kPlayFieldNumberOfTiles);
+						randomEnd = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(randomOrigin.x + [aShip.length integerValue], randomOrigin.y) : CGPointMake(randomOrigin.x, randomOrigin.y + [aShip.length integerValue]);
+					}
+				}	
+			}
+
+			[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
+			[candidateShips addObject:aShip];
+			
+			shipsCount++;
+		}
+
+
+		
+		
+		NSLog(@"=================== shipsCount: %d", shipsCount);
+		NSLog(@"**Origin:   %.2f, %.2f", aShip.position.x, randomOrigin.y);
+		//NSLog(@"**End:      %.2f, %.2f", randomEnd.x, randomEnd.y);
+		NSLog(@"**Type:     %d", aShip.type);
+		NSLog(@"**Length:   %d", [aShip.length integerValue]);
+		NSLog(@"**Orient:   %d", aShip.orientation);
+		
+		
+		[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
+		[candidateShips addObject:aShip];
+	}
+	
+	randomShips = [[NSArray arrayWithArray:candidateShips] retain];
+
+	[candidateShips release];
 }
 
 - (void)didReceiveMemoryWarning {
