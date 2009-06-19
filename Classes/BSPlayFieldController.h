@@ -83,6 +83,10 @@
 // Calculates ship's end point from its origin
 - (CGPoint)calculateEndPointFromOriginForShip:(BSShipController *)aShip;
 
+// Checks if two ships are overlapping
+- (BOOL) areShipsInteresectingIfShipOneOrig:(CGPoint)pointA shipOneEnd:(CGPoint)pointB
+								shipTwoOrig:(CGPoint)pointC shipTwoEnd:(CGPoint)pointD;
+
 // Creates random positions for sips on the play field 
 - (void)createRandomPlayField:(NSArray *)ships;
 

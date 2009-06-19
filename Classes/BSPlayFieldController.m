@@ -190,6 +190,26 @@
 	return endPoint;
 }
 
+- (BOOL)areShipsInteresectingIfShipOneOrig:(CGPoint)pointA shipOneEnd:(CGPoint)pointB 
+								shipTwoOrig:(CGPoint)pointC shipTwoEnd:(CGPoint)pointD {
+	// Ship one line equations
+	float kAOne = pointB.y - pointA.y;
+	float kBOne = pointA.x - pointB.x;
+	//UInt32 kCOne = (kAOne * pointA.x) + (kBOne * pointA.y);
+	
+	// Ship two line equations
+	float kATwo = pointD.y - pointC.y;
+	float kBTwo = pointC.x - pointD.x;
+	//UInt32 kCTwo = (kATwo * pointC.x) + (kBTwo * pointC.y);
+	
+	// Determinant
+	float determinant = (kAOne * kBTwo) - (kATwo * kBOne);
+	NSLog(@"+++++++ DETERMINANT: %f", determinant);
+	
+	if (determinant == 0) return NO;
+	else return YES;		
+}
+
 - (void)createRandomPlayField:(NSArray *)theShips  {
 	UInt32 shipsCount = 0;
 	NSMutableArray *candidateShips = [[NSMutableArray alloc] init];
