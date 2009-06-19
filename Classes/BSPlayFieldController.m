@@ -185,6 +185,11 @@
 	return originPoint;
 }
 
+- (CGPoint)calculateEndPointFromOriginForShip:(BSShipController *)aShip {
+	CGPoint endPoint = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(aShip.position.x + [aShip.length integerValue], aShip.position.y) : CGPointMake(aShip.position.x, aShip.position.y + [aShip.length integerValue]);
+	return endPoint;
+}
+
 - (void)createRandomPlayField:(NSArray *)theShips  {
 	UInt32 shipsCount = 0;
 	NSMutableArray *candidateShips = [[NSMutableArray alloc] init];

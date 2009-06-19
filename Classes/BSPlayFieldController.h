@@ -80,6 +80,9 @@
 // Creates random coordinates for ships in the play field
 - (CGPoint)generateRandonCoordinates;
 
+// Calculates ship's end point from its origin
+- (CGPoint)calculateEndPointFromOriginForShip:(BSShipController *)aShip;
+
 // Creates random positions for sips on the play field 
 - (void)createRandomPlayField:(NSArray *)ships;
 
