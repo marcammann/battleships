@@ -213,55 +213,70 @@
 - (void)createRandomPlayField:(NSArray *)theShips  {
 	UInt32 shipsCount = 0;
 	NSMutableArray *candidateShips = [[NSMutableArray alloc] init];
-
+	
 	for (BSShipController *aShip in theShips) {
-		// Create random coordenates for the ships (inside the play field!)
-		CGPoint randomOrigin = CGPointMake((1 + arc4random()) % kPlayFieldNumberOfTiles, (1 + arc4random()) % kPlayFieldNumberOfTiles);	
-		CGPoint randomEnd = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(randomOrigin.x + [aShip.length integerValue], randomOrigin.y) : CGPointMake(randomOrigin.x, randomOrigin.y + [aShip.length integerValue]);
+		// Create random orientation
+		UInt8 randomOrientation = (1 + arc4random()) % 2;
+		[aShip setOrientation:randomOrientation];
+		
+		// Create random coordinates (inside the play field!)	
+		CGPoint randomOrigin = [self generateRandonCoordinates];
+		[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
+		CGPoint randomEnd = [self calculateEndPointFromOriginForShip:aShip];
+
+		// Ship has to be inside play field
+		while (randomEnd.x > kPlayFieldNumberOfTiles  || randomEnd.y > kPlayFieldNumberOfTiles) {
+			randomOrigin = [self generateRandonCoordinates];
+			[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
+			randomEnd = [self calculateEndPointFromOriginForShip:aShip];
+			NSLog(@"****** One more time! *****");
+		}
+		
+
 
 		// We always want first ship 
-		if (shipsCount == 0) {
+		if ([candidateShips count] == 0) {
 			[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
 			[candidateShips addObject:aShip];
-
-			shipsCount++;
+			NSLog(@"???????????????????");
 		}
 		else {
-			while (randomEnd.x > kPlayFieldNumberOfTiles  || randomEnd.y > kPlayFieldNumberOfTiles) {
-				randomOrigin = CGPointMake((1 + arc4random()) % kPlayFieldNumberOfTiles, (1 + arc4random()) % kPlayFieldNumberOfTiles);
-				randomEnd = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(randomOrigin.x + [aShip.length integerValue], randomOrigin.y) : CGPointMake(randomOrigin.x, randomOrigin.y + [aShip.length integerValue]);
-				
-				for (BSShipController *otherShip in candidateShips) {
-					while (randomOrigin.x > (otherShip.position.x - 1) || // New origin is not before where otherShip starts
-						   randomOrigin.x < (otherShip.position.x + [aShip.length integerValue] + 1) || // New origin is not after where otherShip ends
-						   randomOrigin.y < (otherShip.position.y + 1) || // New origin is not above where otherShip starts
-						   randomOrigin.y > (otherShip.position.y - 1) )  // New origin is not below where otherShip starts
-					{	
-						randomOrigin = CGPointMake((1 + arc4random()) % kPlayFieldNumberOfTiles, (1 + arc4random()) % kPlayFieldNumberOfTiles);
-						randomEnd = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(randomOrigin.x + [aShip.length integerValue], randomOrigin.y) : CGPointMake(randomOrigin.x, randomOrigin.y + [aShip.length integerValue]);
+			for (BSShipController *otherShip in candidateShips) {
+				BOOL areShipsIntersecting = [self areShipsInteresectingIfShipOneOrig:otherShip.position shipOneEnd:[self calculateEndPointFromOriginForShip:otherShip] 
+																		 shipTwoOrig:aShip.position shipTwoEnd:[self calculateEndPointFromOriginForShip:aShip]];
+				if (areShipsIntersecting) {			
+					CGPoint randomOrigin = [self generateRandonCoordinates];
+					[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
+					CGPoint randomEnd = [self calculateEndPointFromOriginForShip:aShip];
+					
+					while (randomEnd.x > kPlayFieldNumberOfTiles  || randomEnd.y > kPlayFieldNumberOfTiles) {
+						randomOrigin = [self generateRandonCoordinates];
+						[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
+						randomEnd = [self calculateEndPointFromOriginForShip:aShip];
+						NSLog(@"****** Again one more tiiiiimee! *****");
 					}
-				}	
+					areShipsIntersecting = [self areShipsInteresectingIfShipOneOrig:otherShip.position shipOneEnd:[self calculateEndPointFromOriginForShip:otherShip] 
+																		shipTwoOrig:aShip.position shipTwoEnd:[self calculateEndPointFromOriginForShip:aShip]];
+				}
 			}
 
+			
 			[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
 			[candidateShips addObject:aShip];
-			
-			shipsCount++;
+			NSLog(@"!!!!!!!!!!!!!!!!!!!");
 		}
-
-
-		
+			
 		
 		NSLog(@"=================== shipsCount: %d", shipsCount);
+		NSLog(@"**CandidateShips.count: %d", [candidateShips count] );
 		NSLog(@"**Origin:   %.2f, %.2f", aShip.position.x, randomOrigin.y);
-		//NSLog(@"**End:      %.2f, %.2f", randomEnd.x, randomEnd.y);
+		NSLog(@"**End:      %.2f, %.2f", randomEnd.x, randomEnd.y);
 		NSLog(@"**Type:     %d", aShip.type);
 		NSLog(@"**Length:   %d", [aShip.length integerValue]);
-		NSLog(@"**Orient:   %d", aShip.orientation);
+		NSLog(@"**Orient:   %d", aShip.orientation);	
+		shipsCount++;
 		
-		
-		[aShip setCoordinate:[self coordinateForGridpoint:randomOrigin] animated:NO];
-		[candidateShips addObject:aShip];
+
 	}
 	
 	randomShips = [[NSArray arrayWithArray:candidateShips] retain];
