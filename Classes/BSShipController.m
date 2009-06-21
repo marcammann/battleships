@@ -62,6 +62,12 @@
 	// e.g. self.myOutlet = nil;
 }
 
+- (void)setTileSize:(CGFloat)aTileSize {
+	tileSize = aTileSize;
+	
+	[shipView setTileSize:aTileSize];
+}
+
 # pragma mark Accessor Methods
 
 - (NSNumber *)length {

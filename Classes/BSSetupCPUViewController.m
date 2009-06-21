@@ -7,7 +7,7 @@
 //
 
 #import "BSSetupCPUViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @implementation BSBaseRectangle
 
@@ -99,6 +99,21 @@
 	[doneButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
 	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:doneButton];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	//[CATransaction begin];
+	
+	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"tileSize"];
+	animation.fromValue = [NSNumber numberWithFloat:30.0f];
+	animation.toValue = [NSNumber numberWithFloat:12.0f];
+	animation.duration = 5.0f;
+	[playField.view addAnimation:animation forKey:@"tileSizeAnimation"];
+	//[playField.view setNeedsDisplay];
+	
+	
+	//[CATransaction commit];
 }
 
 - (void)doneButtonPressed:(id)sender {

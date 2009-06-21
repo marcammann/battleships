@@ -14,7 +14,7 @@
 @synthesize view;
 @synthesize delegate;
 @synthesize interactionDelegate;
-
+@synthesize ships;
 
 - (id)initWithSize:(NSNumber *)theSize {
 	if (self = [super init]) {
@@ -101,7 +101,7 @@
 - (void)addShip:(BSShipController *)aShip {
 	[ships addObject:[aShip retain]];
 	[view.superview addSubview:aShip.view];
-	
+	aShip.tileSize = view.tileSize;
 	aShip.delegate = self;
 	aShip.playFieldController = self;
 }

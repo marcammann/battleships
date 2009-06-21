@@ -49,7 +49,7 @@
 - (void)drawRect:(CGRect)rect {
 	// We take the current tile Size and take the proportion to the big size to
 	// calculate all other values
-	CGFloat prop = tileSize / kTotalFieldSize;
+	CGFloat prop = tileSize / kTileSize;
 	
 	CGFloat indexBarSize = (kTotalFieldSize - kPlayFieldSize) * prop;
 	CGFloat playFieldSize = kPlayFieldSize * prop;
