@@ -21,6 +21,7 @@
 		playField = [[UIImageView alloc] init];
 		indexRow = [[UIView alloc] init];
 		indexColumn = [[UIView alloc] init];
+		[self setTileSize:30.0f];
     }
     return self;
 }
@@ -36,9 +37,19 @@
 	
 }
 
+- (void)setTileSize:(CGFloat)aTileSize {
+	tileSize = aTileSize;
+	
+	// set the frame..
+	CGFloat prop = tileSize / kTileSize;
+	CGFloat constraints = kTotalFieldSize * prop;
+	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, constraints, constraints);
+}
+
 - (void)drawRect:(CGRect)rect {
-	CGFloat prop = self.frame.size.width / kTotalFieldSize;
-	tileSize = kTileSize * prop;
+	// We take the current tile Size and take the proportion to the big size to
+	// calculate all other values
+	CGFloat prop = tileSize / kTotalFieldSize;
 	
 	CGFloat indexBarSize = (kTotalFieldSize - kPlayFieldSize) * prop;
 	CGFloat playFieldSize = kPlayFieldSize * prop;

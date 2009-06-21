@@ -79,6 +79,9 @@
 // Checks if all ships are in the grid
 - (BOOL)shipsInGrid;
 
+// Sets the tile size in the view and all ships
+- (void)setTileSize:(CGFloat)aTileSize;
+
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, assign) id interactionDelegate;
 @property (nonatomic, retain) NSNumber *size;

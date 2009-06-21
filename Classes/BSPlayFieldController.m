@@ -100,6 +100,8 @@
 // Adds a ship to the field - and thus sets the delegate etc.
 - (void)addShip:(BSShipController *)aShip {
 	[ships addObject:[aShip retain]];
+	[view.superview addSubview:aShip.view];
+	
 	aShip.delegate = self;
 	aShip.playFieldController = self;
 }
@@ -120,6 +122,14 @@
 	
 	[delegate playField:self allShipsInField:YES];
 	return YES;
+}
+
+- (void)setTileSize:(CGFloat)aTileSize {
+	view.tileSize = aTileSize;
+	
+	for (BSShipController *ship in ships) {
+		ship.tileSize = aTileSize;
+	}
 }
 
 # pragma mark BSPlayFieldViewDelegate Methods

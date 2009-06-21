@@ -33,13 +33,18 @@
 	// The ships min and max coordinates. Literally means: left upper and right lower corner
 	CGPoint minCoordinate;
 	CGPoint maxCoordinate;
+	
+	// The tile size
+	CGFloat tileSize;
 }
 
 @property (nonatomic, readonly) CGPoint dragPosition;
 @property (nonatomic, readonly) CGPoint minCoordinate;
 @property (nonatomic, readonly) CGPoint maxCoordinate;
+@property (nonatomic, readwrite) CGFloat tileSize;
 
-- (id)initWithFrame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController;
+
+- (id)initWithTileSize:(CGFloat)aTileSize frame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController;
 - (void)resetDragPosition;
 
 

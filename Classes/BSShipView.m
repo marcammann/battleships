@@ -14,9 +14,9 @@
 @synthesize dragPosition;
 @synthesize minCoordinate;
 @synthesize maxCoordinate;
+@synthesize tileSize;
 
-
-- (id)initWithFrame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController {
+- (id)initWithTileSize:(CGFloat)aTileSize frame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController {
 	if (self = [super initWithFrame:aFrame]) {
 		self.backgroundColor = [UIColor blueColor];
 		shipController = aController;
@@ -25,15 +25,22 @@
 	return self;
 }
 
+- (void)setTileSize:(CGFloat)aTileSize {
+	tileSize = aTileSize;
+	CGFloat prop = tileSize / kTileSize;
+	
+	
+	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width * prop, self.frame.size.height * prop);
+}
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = touches.anyObject;
 	
 	NSLog(@"touched");
 	
 	startTouchPosition = [touch locationInView:[self superview]];
-
-	dragPosition = self.frame.origin;	
-	
+	dragPosition = self.frame.origin;
 	[shipController ship:self touchesStartedAt:startTouchPosition];
 }
 

@@ -29,7 +29,7 @@
 		orientation = BSShipOrientationVertical;
 		tileSize = 30.0f;
 		
-		self.shipView = [[BSShipView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tileSize, tileSize * [[NSNumber numberWithInt:type + 2] intValue]) controller:self];
+		self.shipView = [[BSShipView alloc] initWithTileSize:tileSize frame:CGRectMake(0.0f, 0.0f, tileSize, tileSize * [[NSNumber numberWithInt:type + 2] intValue]) controller:self];
 	}
 	
 	return self;

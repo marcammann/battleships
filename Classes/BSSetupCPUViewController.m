@@ -40,7 +40,7 @@
 		
 		helpButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
 		doneButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-		// Diable the done button as long as not all ships are placed
+		// Disable the done button as long as not all ships are placed
 		doneButton.enabled = NO;
 		
 		// Create the Ships

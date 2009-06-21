@@ -26,7 +26,7 @@
 }
 
 @property (readonly) UIImageView *playField;
-@property (readonly) CGFloat tileSize;
+@property (readwrite) CGFloat tileSize;
 @property (nonatomic, assign) id controller;
 
 - (id)initWithSize:(NSNumber *)size;
