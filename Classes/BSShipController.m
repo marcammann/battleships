@@ -22,6 +22,7 @@
 @synthesize shipView;
 @synthesize position;
 @synthesize tileSize;
+@synthesize relativeCoordinates;
 
 - (id)initWithType:(BSShipType)theType {
 	if (self = [super init]) {
@@ -63,8 +64,12 @@
 }
 
 - (void)setTileSize:(CGFloat)aTileSize {
+	CGFloat prop = aTileSize / tileSize;
+	
 	tileSize = aTileSize;
 	
+	BSPlayFieldController *ctrl = (BSPlayFieldController *)playFieldController;
+	self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width * prop, self.view.frame.size.height * prop);		
 	[shipView setTileSize:aTileSize];
 }
 
@@ -127,6 +132,7 @@
 	
 	[delegate ship:self rotatedToOrientation:orientation];
 }
+
 
 # pragma mark BSShipViewDelegate Methods
 

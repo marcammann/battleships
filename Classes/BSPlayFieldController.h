@@ -22,6 +22,11 @@
 - (void)playField:(id)aField ship:(BSShipController *)aShip movedToPoint:(CGPoint)coordinate;
 @end
 
+typedef enum {
+	BSPlayFieldSizeLarge = 320,
+	BSPlayFieldSizeSmall = 128,
+} BSPlayFieldSize;
+
 
 @interface BSPlayFieldController : UIViewController <BSShipDelegate, BSPlayFieldViewDelegate> {
 	// The delegate to send actions to
@@ -37,14 +42,21 @@
 	NSMutableArray *ships;
 	
 	// The Play Field View (duh!)
-	BSPlayFieldView *view;
+	BSPlayFieldView *fieldView;
 	
 	// If the Field is Touch Enabled (to mark a field)
 	BOOL touchEnabled;
+
 }
 
 // Initializer with size
 - (id)initWithSize:(NSNumber *)size frame:(CGRect)aFrame;
+
+// Resizes the view
+- (void)setSize:(BSViewSize)aSize position:(CGPoint)aPosition animated:(BOOL)animated;
+
+// Sets the origin of the field
+- (void)setOrigin:(CGPoint)position;
 
 // Adds a ship to the field - and thus sets the delegate etc.
 - (void)addShip:(BSShipController *)aShip;
@@ -86,7 +98,7 @@
 @property (nonatomic, assign) id interactionDelegate;
 @property (nonatomic, retain) NSNumber *size;
 @property (nonatomic, readonly) NSMutableArray *ships;
-@property (nonatomic, retain) BSPlayFieldView *view;
+@property (nonatomic, retain) BSPlayFieldView *fieldView;
 @property (readwrite) BOOL touchEnabled;
 
 @end

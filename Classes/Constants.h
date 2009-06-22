@@ -18,4 +18,9 @@
 
 #define kTapDelay 0.2
 
+typedef enum {
+	BSViewSizeSmall,
+	BSViewSizeLarge,
+} BSViewSize;
+
 #endif

@@ -41,7 +41,7 @@
 		helpButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
 		doneButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
 		// Disable the done button as long as not all ships are placed
-		doneButton.enabled = NO;
+		//doneButton.enabled = NO;
 		
 		// Create the Ships
 		[self createShips];
@@ -77,14 +77,14 @@
 	label.text = [NSString stringWithFormat:@"%i", amount];
 	[baseLabels setObject:label forKey:[NSNumber numberWithInt:type]];
 	
-	[canvas addSubview:label];
+	//[canvas addSubview:label];
 }
 
 - (void)loadView {
 	[super loadView];
 	
 	// Setup the canvas and create the ships
-	[canvas insertSubview:playField.view atIndex:0];
+	[canvas insertSubview:playField.fieldView atIndex:0];
 	[self.view addSubview:canvas];
 	
 	// Setup the 2 Buttons
@@ -103,25 +103,23 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	//[CATransaction begin];
 	
-	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"tileSize"];
-	animation.fromValue = [NSNumber numberWithFloat:30.0f];
-	animation.toValue = [NSNumber numberWithFloat:12.0f];
-	animation.duration = 5.0f;
-	[playField.view addAnimation:animation forKey:@"tileSizeAnimation"];
+	//[playField setTileSize:12.0f];
 	//[playField.view setNeedsDisplay];
-	
-	
-	//[CATransaction commit];
 }
 
-- (void)doneButtonPressed:(id)sender {
+- (void)animatePlayFieldToSmall {
+	[playField setSize:BSViewSizeSmall position:CGPointMake(330.0f, 0.0f) animated:YES];
+}
 	
+
+
+- (void)doneButtonPressed:(id)sender {
+	[playField setSize:BSViewSizeLarge position:CGPointMake(0.0f, 0.0f) animated:YES];
 }
 
 - (void)helpButtonPressed:(id)sender {
-
+	[self animatePlayFieldToSmall];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -145,7 +143,7 @@
 # pragma mark BSPlayFieldDisplayDelegate Methods
 
 - (void)playField:(id)field allShipsInField:(BOOL)inField {
-	doneButton.enabled = inField;
+	//doneButton.enabled = inField;
 }
 
 @end

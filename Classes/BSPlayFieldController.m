@@ -8,10 +8,12 @@
 
 #import "BSPlayFieldController.h"
 #import "BSShipView.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @implementation BSPlayFieldController
 
-@synthesize view;
+@synthesize fieldView;
 @synthesize delegate;
 @synthesize interactionDelegate;
 @synthesize ships;
@@ -19,8 +21,8 @@
 - (id)initWithSize:(NSNumber *)theSize {
 	if (self = [super init]) {
 		size = [theSize retain];
-		view = [[BSPlayFieldView alloc] initWithSize:size frame:CGRectMake(0.0f, 0.0f, 320.0f, 320.0f)];
-		view.controller = self;
+		fieldView = [[BSPlayFieldView alloc] initWithSize:size frame:CGRectMake(0.0f, 0.0f, 320.0f, 320.0f)];
+		fieldView.controller = self;
 		ships = [[NSMutableArray array] retain];
 	}
 	
@@ -29,11 +31,49 @@
 
 - (void)loadView {
 	[super loadView];
+	self.view = fieldView;
+}
+
+- (void)setSize:(BSViewSize)aSize position:(CGPoint)aPosition animated:(BOOL)animated {
+	CGPoint diff = CGPointMake(aPosition.x - self.fieldView.frame.origin.x, aPosition.y - self.fieldView.frame.origin.y);
+	
+	CGFloat oldWidth = CGRectGetWidth(self.fieldView.frame);
+	[self.fieldView animateToViewSize:aSize position:aPosition duration:1.5f];
+	CGFloat prop = CGRectGetWidth(self.fieldView.frame) / oldWidth;
+
+	for (BSShipController *ship in ships) {
+		// We calculate the new position of the ship after the field has moved
+		CGPoint newCoordinates = CGPointMake(ship.view.frame.origin.x + diff.x, ship.view.frame.origin.y + diff.y);
+		CGPoint diffToGrid = CGPointMake(newCoordinates.x - self.fieldView.frame.origin.x, newCoordinates.y - self.fieldView.frame.origin.y);
+		diffToGrid = CGPointMake(diffToGrid.x * prop, diffToGrid.y * prop);
+		newCoordinates = CGPointMake(self.fieldView.frame.origin.x + diffToGrid.x, self.fieldView.frame.origin.y + diffToGrid.y);
+		[ship.shipView animateToViewSize:aSize position:newCoordinates duration:1.5f];
+	}
+}
+
+
+- (void)setOrigin:(CGPoint)position {
+	[self.view.layer setPosition:position];
+	[self.view setCenter:CGPointMake(self.view.center.x + (position.x - self.view.frame.origin.x), self.view.center.y + (position.y - self.view.frame.origin.y))];
+	
+	for (BSShipController *ship in ships) {
+		[ship setCoordinate:position animated:NO];
+	}
+	
+}
+
+- (void)setTileSize:(CGFloat)aTileSize {
+	CGFloat prop = aTileSize / fieldView.tileSize;
+	fieldView.tileSize = aTileSize;
+	
+	for (BSShipController *ship in ships) {
+		ship.tileSize = aTileSize;
+	}
 }
 
 - (CGPoint)gridpointForCoordinate:(CGPoint)aPoint {
 	CGPoint gridOffset = [self gridOffset];
-	CGPoint gridpoint = CGPointMake(round((aPoint.x - gridOffset.x) / self.view.tileSize), round((aPoint.y - gridOffset.y) / self.view.tileSize));
+	CGPoint gridpoint = CGPointMake(round((aPoint.x - gridOffset.x) / self.fieldView.tileSize), round((aPoint.y - gridOffset.y) / self.fieldView.tileSize));
 	
 	//NSLog(@"Gridp: %.2f / %.2f", gridpoint.x, gridpoint.y);
 	return gridpoint;
@@ -42,7 +82,7 @@
 - (CGPoint)coordinateForGridpoint:(CGPoint)aPoint {
 	CGPoint gridOffset = [self gridOffset];
 	NSLog(@"Grid Offset: %.2f / %.2f", gridOffset.x, gridOffset.y);
-	CGPoint coordinates = CGPointMake(gridOffset.x + (aPoint.x * self.view.tileSize), gridOffset.y + (aPoint.y * self.view.tileSize));
+	CGPoint coordinates = CGPointMake(gridOffset.x + (aPoint.x * self.fieldView.tileSize), gridOffset.y + (aPoint.y * self.fieldView.tileSize));
 	
 	NSLog(@"%.2f / %.2f", coordinates.x, coordinates.y);
 	
@@ -51,13 +91,13 @@
 
 - (CGPoint)tileForCoordinate:(CGPoint)aPoint {
 	CGPoint gridOffset = [self gridOffset];
-	CGPoint tile = CGPointMake(floor((aPoint.x - gridOffset.x) / self.view.tileSize), floor((aPoint.y - gridOffset.y) / self.view.tileSize));
+	CGPoint tile = CGPointMake(floor((aPoint.x - gridOffset.x) / self.fieldView.tileSize), floor((aPoint.y - gridOffset.y) / self.fieldView.tileSize));
 	
 	return tile;
 }
 
 - (CGPoint)gridOffset {
-	return CGPointMake(view.frame.origin.x + view.playField.frame.origin.x, view.frame.origin.y + view.playField.frame.origin.y);
+	return CGPointMake(fieldView.frame.origin.x + fieldView.playField.frame.origin.x, fieldView.frame.origin.y + fieldView.playField.frame.origin.y);
 }
 
 - (void)setTileMarked:(CGPoint)tile {
@@ -66,7 +106,7 @@
 	UIView *overlay = [[UIView alloc] initWithFrame:CGRectMake(tileCoordinates.x, tileCoordinates.y, 30.0f, 30.0f)];
 	overlay.backgroundColor = [UIColor blueColor];
 	
-	[self.view addSubview:overlay];
+	[self.fieldView addSubview:overlay];
 }
 
 // Checks if a gridpoint is really in the grid
@@ -100,8 +140,8 @@
 // Adds a ship to the field - and thus sets the delegate etc.
 - (void)addShip:(BSShipController *)aShip {
 	[ships addObject:[aShip retain]];
-	[view.superview addSubview:aShip.view];
-	aShip.tileSize = view.tileSize;
+	[fieldView.superview addSubview:aShip.view];
+	aShip.tileSize = fieldView.tileSize;
 	aShip.delegate = self;
 	aShip.playFieldController = self;
 }
@@ -124,13 +164,7 @@
 	return YES;
 }
 
-- (void)setTileSize:(CGFloat)aTileSize {
-	view.tileSize = aTileSize;
-	
-	for (BSShipController *ship in ships) {
-		ship.tileSize = aTileSize;
-	}
-}
+
 
 # pragma mark BSPlayFieldViewDelegate Methods
 

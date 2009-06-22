@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Constants.h"
 
 @protocol BSShipViewDelegate
 - (void)ship:(id)aShip touchesStartedAt:(CGPoint)aPoint;
@@ -46,6 +47,6 @@
 
 - (id)initWithTileSize:(CGFloat)aTileSize frame:(CGRect)aFrame controller:(id<BSShipViewDelegate>)aController;
 - (void)resetDragPosition;
-
+- (void)animateToViewSize:(BSViewSize)aSize position:(CGPoint)position duration:(CGFloat)duration;
 
 @end

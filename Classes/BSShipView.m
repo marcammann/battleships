@@ -20,17 +20,39 @@
 	if (self = [super initWithFrame:aFrame]) {
 		self.backgroundColor = [UIColor blueColor];
 		shipController = aController;
+		tileSize = aTileSize;
 	}
 	
 	return self;
 }
 
+- (void)animateToViewSize:(BSViewSize)aSize position:(CGPoint)position duration:(CGFloat)duration {
+	[UIView beginAnimations:@"shipAnimation" context:NULL];
+	[UIView setAnimationDuration:duration];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];	
+	
+	CGFloat tmpTileSize = (aSize == BSViewSizeSmall) ? kSmallTileSize : kTileSize;
+	CGFloat prop = tmpTileSize / kTileSize;
+	CGSize newSize = CGSizeMake((self.frame.size.width / tileSize) * kTileSize, (self.frame.size.height / tileSize) * kTileSize);
+	
+	
+	[self setTileSize:tmpTileSize];
+	self.frame = CGRectMake(position.x, position.y, newSize.width * prop, newSize.height * prop);
+	[UIView commitAnimations];
+}
+
+- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+	[self setNeedsDisplay];
+}
+
+- (void)drawRect:(CGRect)rect {
+	CGFloat prop = tileSize / kTileSize;
+	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, (self.frame.size.width/tileSize) * kTileSize * prop, (self.frame.size.height/tileSize) * kTileSize * prop);
+}
+
 - (void)setTileSize:(CGFloat)aTileSize {
 	tileSize = aTileSize;
-	CGFloat prop = tileSize / kTileSize;
-	
-	
-	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width * prop, self.frame.size.height * prop);
 }
 
 
