@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BSPlayFieldController.h"
+#import "BSSettings.h"
 
 @protocol BSPlayerControllerInteractionDelegate
 // current player shot at player at tile
@@ -40,12 +41,21 @@
 	NSMutableArray *opposingPlayers;
 	
 	// Players own field
-	BSPlayFieldController *playerField;
+	BSPlayFieldController *playField;
+	
+	// Settings
+	BSSettings *settings;
 }
 
 @property (nonatomic, assign) id<BSPlayerControllerInteractionDelegate> interactionDelegate;
 @property (nonatomic, readwrite) BOOL isActive;
+@property (nonatomic, retain) BSSettings *settings;
+@property (nonatomic, retain) BSPlayFieldController *playField;
 
-- (id)init;
+- (id)initWithSettings:(BSSettings *)settings;
+- (void)createShips;
+- (void)createPlayField;
+- (void)create:(NSInteger)amount ofShipsWithType:(BSShipType)type atPosition:(CGPoint)leftUpper;
+
 
 @end

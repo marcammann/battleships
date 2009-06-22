@@ -35,6 +35,7 @@
 
 	CGFloat buttonYPos = 50.0f;
 	vsCpuButton.frame = CGRectMake(buttonXPos, buttonYPos, kStartButtonWidth, kStartButtonHeight);
+	[vsCpuButton setTitle:@"vs. CPU" forState:UIControlStateNormal];
 	[vsCpuButton addTarget:self action:@selector(loadCPUGame) forControlEvents:UIControlEventTouchUpInside];
 	
 	buttonYPos += kStartButtonHeight + 10.0f;

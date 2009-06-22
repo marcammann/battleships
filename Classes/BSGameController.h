@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BSPlayerController.h"
 
-@interface BSGameController : NSObject {
+@interface BSGameController : NSObject <BSPlayerControllerInteractionDelegate> {
 	// Array of players
 	NSMutableArray *players;
 	
@@ -21,8 +21,12 @@
 }
 
 @property (readonly, getter=winner) BSPlayerController *winner; 
+@property (nonatomic, readonly) NSMutableArray *players;
+@property (nonatomic, readonly) NSMutableArray *shots;
+
 
 // Check if the game has a winner
 - (BOOL)hasWinner;
+- (void)addPlayer:(BSPlayerController *)player;
 
 @end

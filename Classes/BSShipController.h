@@ -22,6 +22,11 @@ typedef enum {
 	BSShipType5,
 } BSShipType;
 
+typedef enum {
+	BSShipSizeSmall,
+	BSShipSizeLarge,
+} BSShipSize;
+
 @protocol BSShipDelegate
 - (void)ship:(id)aShip movedToPoint:(CGPoint)aPoint;
 - (void)ship:(id)aShip rotatedToOrientation:(BSShipOrientation)anOrientation;
@@ -63,6 +68,9 @@ typedef enum {
 	
 	// The position in the grid
 	CGPoint position;
+	
+	// Coordinates relative to the play field
+	CGPoint relativeCoordinates;
 }
 
 // Initializer with the type
@@ -80,6 +88,9 @@ typedef enum {
 // Sets or Moves the ship to some other coordinates
 - (void)setCoordinate:(CGPoint)aPoint animated:(BOOL)animated;
 
+// Used to move/resize a ship
+- (void)setSize:(BSShipSize)aSize position:(CGPoint)aPosition animated:(BOOL)animated;
+
 @property (nonatomic, retain) BSShipView *shipView;
 
 @property (readwrite, getter=isMovable) BOOL movable;
@@ -95,5 +106,7 @@ typedef enum {
 @property (nonatomic, assign) id delegate;
 
 @property (nonatomic, readwrite) CGPoint position;
+@property (nonatomic, readwrite) CGPoint relativeCoordinates;
+
 
 @end

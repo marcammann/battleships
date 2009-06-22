@@ -72,7 +72,7 @@
 
 - (void)drawRect:(CGRect)rect {
 	//[canvas addSubview:playFieldController.view];
-	[canvas addSubview:ownFieldController.view];
+	[canvas addSubview:ownFieldController.fieldView];
 	UInt32 i = 0;
 	for (BSShipController *aShip in ships) {
 		switch (i) {

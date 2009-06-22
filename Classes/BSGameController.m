@@ -11,4 +11,32 @@
 
 @implementation BSGameController
 
+@synthesize players, shots;
+
+- (void)addPlayer:(BSPlayerController *)player {
+	[players addObject:player];
+}
+
+- (void)player:(id)aPlayer shotPlayer:(id)shotPlayer atTile:(CGPoint)tile {
+	NSLog(@"YAYAY");
+	
+	
+}
+
+- (void)playerDidPauseGame:(id)aPlayer {
+	
+}
+
+- (void)playerDidResumeGame:(id)aPlayer {
+	
+}
+
+- (BOOL)playerCanPauseGame:(id)aPlayer {
+	
+}
+
+- (void)playerDidQuitGame:(id)aPlayer {
+	
+}
+
 @end

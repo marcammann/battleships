@@ -39,6 +39,7 @@
 		496B10160FEA68CD00D2EA39 /* UIColor-SQLitePersistentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0F410FEA68CC00D2EA39 /* UIColor-SQLitePersistentObject.m */; };
 		496B10170FEA68CD00D2EA39 /* UIImage-SQLitePersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0F430FEA68CC00D2EA39 /* UIImage-SQLitePersistence.m */; };
 		496B10B00FEA69C400D2EA39 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B10AF0FEA69C400D2EA39 /* libsqlite3.dylib */; };
+		496B13300FEBC35500D2EA39 /* BSPlayCPUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B132F0FEBC35500D2EA39 /* BSPlayCPUViewController.m */; };
 		49A1E15B0F82C7C6003021C0 /* tile_bg_paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */; };
 		49A1E1600F82C7DC003021C0 /* BSStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */; };
 		49A1E1610F82C7DC003021C0 /* BSSetupCPUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E15F0F82C7DC003021C0 /* BSSetupCPUViewController.m */; };
@@ -47,6 +48,9 @@
 		49A1E16B0F82C7E9003021C0 /* BSSetupScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E1680F82C7E9003021C0 /* BSSetupScreen.m */; };
 		49A1E2900F82EEC6003021C0 /* BSPlayFieldController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */; };
 		49A404550FE2F8F7004A7E10 /* BSCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A404540FE2F8F7004A7E10 /* BSCanvasView.m */; };
+		49CE01C70FF00E5F0074FA21 /* BSPlayerControllerCPU.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CE01C60FF00E5F0074FA21 /* BSPlayerControllerCPU.m */; };
+		49CE01CC0FF012200074FA21 /* BSPlayerControllerHuman.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CE01CB0FF012200074FA21 /* BSPlayerControllerHuman.m */; };
+		49CE02B00FF02E360074FA21 /* BSShootingFieldController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CE02AF0FF02E360074FA21 /* BSShootingFieldController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +111,8 @@
 		496B0F420FEA68CC00D2EA39 /* UIImage-SQLitePersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-SQLitePersistence.h"; sourceTree = "<group>"; };
 		496B0F430FEA68CC00D2EA39 /* UIImage-SQLitePersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-SQLitePersistence.m"; sourceTree = "<group>"; };
 		496B10AF0FEA69C400D2EA39 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		496B132E0FEBC35500D2EA39 /* BSPlayCPUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayCPUViewController.h; sourceTree = "<group>"; };
+		496B132F0FEBC35500D2EA39 /* BSPlayCPUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayCPUViewController.m; sourceTree = "<group>"; };
 		49A1E15A0F82C7C6003021C0 /* tile_bg_paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tile_bg_paper.png; path = Classes/tile_bg_paper.png; sourceTree = "<group>"; };
 		49A1E15C0F82C7DC003021C0 /* BSStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStartViewController.h; sourceTree = "<group>"; };
 		49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSStartViewController.m; sourceTree = "<group>"; };
@@ -123,6 +129,12 @@
 		49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayFieldController.m; sourceTree = "<group>"; };
 		49A404530FE2F8F7004A7E10 /* BSCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCanvasView.h; sourceTree = "<group>"; };
 		49A404540FE2F8F7004A7E10 /* BSCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSCanvasView.m; sourceTree = "<group>"; };
+		49CE01C50FF00E5F0074FA21 /* BSPlayerControllerCPU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayerControllerCPU.h; sourceTree = "<group>"; };
+		49CE01C60FF00E5F0074FA21 /* BSPlayerControllerCPU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayerControllerCPU.m; sourceTree = "<group>"; };
+		49CE01CA0FF012200074FA21 /* BSPlayerControllerHuman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayerControllerHuman.h; sourceTree = "<group>"; };
+		49CE01CB0FF012200074FA21 /* BSPlayerControllerHuman.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayerControllerHuman.m; sourceTree = "<group>"; };
+		49CE02AE0FF02E360074FA21 /* BSShootingFieldController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSShootingFieldController.h; sourceTree = "<group>"; };
+		49CE02AF0FF02E360074FA21 /* BSShootingFieldController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSShootingFieldController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +232,8 @@
 				49A1E1640F82C7E9003021C0 /* BSPlayFieldView.m */,
 				49A1E28E0F82EEC6003021C0 /* BSPlayFieldController.h */,
 				49A1E28F0F82EEC6003021C0 /* BSPlayFieldController.m */,
+				49CE02AE0FF02E360074FA21 /* BSShootingFieldController.h */,
+				49CE02AF0FF02E360074FA21 /* BSShootingFieldController.m */,
 			);
 			name = "Play Field";
 			sourceTree = "<group>";
@@ -240,6 +254,10 @@
 			children = (
 				496B0E930FEA3E1800D2EA39 /* BSPlayerController.h */,
 				496B0E940FEA3E1800D2EA39 /* BSPlayerController.m */,
+				49CE01C50FF00E5F0074FA21 /* BSPlayerControllerCPU.h */,
+				49CE01C60FF00E5F0074FA21 /* BSPlayerControllerCPU.m */,
+				49CE01CA0FF012200074FA21 /* BSPlayerControllerHuman.h */,
+				49CE01CB0FF012200074FA21 /* BSPlayerControllerHuman.m */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -276,6 +294,8 @@
 				49A1E15F0F82C7DC003021C0 /* BSSetupCPUViewController.m */,
 				496B0F050FEA679300D2EA39 /* BSSetupCPUSkillViewController.h */,
 				496B0F060FEA679300D2EA39 /* BSSetupCPUSkillViewController.m */,
+				496B132E0FEBC35500D2EA39 /* BSPlayCPUViewController.h */,
+				496B132F0FEBC35500D2EA39 /* BSPlayCPUViewController.m */,
 			);
 			name = CPU;
 			sourceTree = "<group>";
@@ -415,6 +435,10 @@
 				496B10150FEA68CD00D2EA39 /* SQLitePersistentObject.m in Sources */,
 				496B10160FEA68CD00D2EA39 /* UIColor-SQLitePersistentObject.m in Sources */,
 				496B10170FEA68CD00D2EA39 /* UIImage-SQLitePersistence.m in Sources */,
+				496B13300FEBC35500D2EA39 /* BSPlayCPUViewController.m in Sources */,
+				49CE01C70FF00E5F0074FA21 /* BSPlayerControllerCPU.m in Sources */,
+				49CE01CC0FF012200074FA21 /* BSPlayerControllerHuman.m in Sources */,
+				49CE02B00FF02E360074FA21 /* BSShootingFieldController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

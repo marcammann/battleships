@@ -17,13 +17,23 @@
 @end
 
 @protocol BSPlayFieldInteractionDelegate
+@optional
 - (void)playField:(id)aField tappedAt:(CGPoint)aPoint;
+- (void)playField:(id)aField ship:(BSShipController *)aShip movedToPoint:(CGPoint)coordinate;
 @end
+
+typedef enum {
+	BSPlayFieldSizeLarge = 320,
+	BSPlayFieldSizeSmall = 128,
+} BSPlayFieldSize;
 
 
 @interface BSPlayFieldController : UIViewController <BSShipDelegate, BSPlayFieldViewDelegate> {
 	// The delegate to send actions to
 	id<BSPlayFieldDisplayDelegate> delegate;
+	
+	// The delegate that receives ships moving around etc.
+	id<BSPlayFieldInteractionDelegate> interactionDelegate;
 	
 	// Size of the Field in number of tiles
 	NSNumber *size;
@@ -32,7 +42,7 @@
 	NSMutableArray *ships;
 	
 	// The Play Field View (duh!)
-	BSPlayFieldView *view;
+	BSPlayFieldView *fieldView;
 	
 	// If the Field is Touch Enabled (to mark a field)
 	BOOL touchEnabled;	
@@ -43,6 +53,12 @@
 
 // Initializer with size
 - (id)initWithSize:(NSNumber *)size frame:(CGRect)aFrame;
+
+// Resizes the view
+- (void)setSize:(BSViewSize)aSize position:(CGPoint)aPosition animated:(BOOL)animated;
+
+// Sets the origin of the field
+- (void)setOrigin:(CGPoint)position;
 
 // Adds a ship to the field - and thus sets the delegate etc.
 - (void)addShip:(BSShipController *)aShip;
@@ -90,10 +106,15 @@
 // Creates random positions for sips on the play field 
 - (void)createRandomPlayField:(NSArray *)ships;
 
+// Sets the tile size in the view and all ships
+- (void)setTileSize:(CGFloat)aTileSize;
+
+
 @property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) id interactionDelegate;
 @property (nonatomic, retain) NSNumber *size;
 @property (nonatomic, readonly) NSMutableArray *ships;
-@property (nonatomic, retain) BSPlayFieldView *view;
+@property (nonatomic, retain) BSPlayFieldView *fieldView;
 @property (readwrite) BOOL touchEnabled;
 
 @property (nonatomic, readonly) NSArray *randomShips;
