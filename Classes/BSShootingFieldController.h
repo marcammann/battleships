@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "BSPlayFieldController.h"
-#import "BSPlayerController.h"
 
 
 @interface BSShootingFieldController : BSPlayFieldController {
-	BSPlayerController *enemy;
+	id enemy;
 }
 
-@property (nonatomic, retain) BSPlayerController *enemy;
+@property (nonatomic, retain) id enemy;
 
 @end

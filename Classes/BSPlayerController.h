@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BSShootingFieldController.h"
 #import "BSPlayFieldController.h"
 #import "BSSettings.h"
+#import "BSShot.h"
+
 
 @protocol BSPlayerControllerInteractionDelegate
 // current player shot at player at tile
@@ -23,10 +26,18 @@
 - (void)playerDidQuitGame:(id)aPlayer;
 @end
 
+@protocol BSPlayerControllerWindowDelegate
+// Player did win
+- (void)player:(id)aPlayer endedGame:(id)aGame withWinner:(id)aWinner;
+@end
+
 
 @interface BSPlayerController : NSObject <BSPlayFieldInteractionDelegate> {
 	// Where all the user interactions are sent to
 	id<BSPlayerControllerInteractionDelegate> interactionDelegate;
+	
+	// Where the visual response is sent
+	id<BSPlayerControllerWindowDelegate> windowDelegate;
 	
 	// Is the player active?
 	BOOL isActive;
@@ -43,19 +54,27 @@
 	// Players own field
 	BSPlayFieldController *playField;
 	
+	// Players shooting field
+	BSShootingFieldController *shootingField;
+	
 	// Settings
 	BSSettings *settings;
 }
 
 @property (nonatomic, assign) id<BSPlayerControllerInteractionDelegate> interactionDelegate;
+@property (nonatomic, assign) id<BSPlayerControllerWindowDelegate> windowDelegate;
 @property (nonatomic, readwrite) BOOL isActive;
 @property (nonatomic, retain) BSSettings *settings;
 @property (nonatomic, retain) BSPlayFieldController *playField;
+@property (nonatomic, retain) BSShootingFieldController *shootingField;
+
+
 
 - (id)initWithSettings:(BSSettings *)settings;
 - (void)createShips;
 - (void)createPlayField;
 - (void)create:(NSInteger)amount ofShipsWithType:(BSShipType)type atPosition:(CGPoint)leftUpper;
-
+- (void)shotMade:(BSShot *)shot;
+- (void)game:(id)game wonByPlayer:(id)player;
 
 @end

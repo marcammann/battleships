@@ -15,6 +15,7 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		491C23490FDABB8800EFCBA7 /* BSShipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491C23480FDABB8800EFCBA7 /* BSShipController.m */; };
 		492C5BBA0FE7E606000D3DF4 /* BSPlayScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 492C5BB90FE7E606000D3DF4 /* BSPlayScreen.m */; };
+		493BCD370FF1092A0078672B /* BSShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 493BCD360FF1092A0078672B /* BSShot.m */; };
 		49476F210FE6B65A0077713D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49476F200FE6B65A0077713D /* QuartzCore.framework */; };
 		49476F5B0FE6C05D0077713D /* playfieldBgPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */; };
 		49476F860FE6D05C0077713D /* playfieldBgSmallPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */; };
@@ -67,6 +68,8 @@
 		491C23480FDABB8800EFCBA7 /* BSShipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSShipController.m; sourceTree = "<group>"; };
 		492C5BB80FE7E606000D3DF4 /* BSPlayScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayScreen.h; sourceTree = "<group>"; };
 		492C5BB90FE7E606000D3DF4 /* BSPlayScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayScreen.m; sourceTree = "<group>"; };
+		493BCD350FF1092A0078672B /* BSShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSShot.h; sourceTree = "<group>"; };
+		493BCD360FF1092A0078672B /* BSShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSShot.m; sourceTree = "<group>"; };
 		49476F200FE6B65A0077713D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playfieldBgPlain.png; sourceTree = "<group>"; };
 		49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playfieldBgSmallPlain.png; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 			children = (
 				496B0EBF0FEA44F500D2EA39 /* BSGameController.h */,
 				496B0EC00FEA44F500D2EA39 /* BSGameController.m */,
+				493BCD350FF1092A0078672B /* BSShot.h */,
+				493BCD360FF1092A0078672B /* BSShot.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				49CE01C70FF00E5F0074FA21 /* BSPlayerControllerCPU.m in Sources */,
 				49CE01CC0FF012200074FA21 /* BSPlayerControllerHuman.m in Sources */,
 				49CE02B00FF02E360074FA21 /* BSShootingFieldController.m in Sources */,
+				493BCD370FF1092A0078672B /* BSShot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

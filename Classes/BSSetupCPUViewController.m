@@ -40,8 +40,8 @@
 		playField = player.playField;
 		
 		// Create a CPU player
-		BSPlayerControllerCPU *cpuPlayer = [[BSPlayerControllerCPU alloc] initWithSettings:settings];
-		[game addPlayer:cpuPlayer];
+		//BSPlayerControllerCPU *cpuPlayer = [[BSPlayerControllerCPU alloc] initWithSettings:settings];
+		//[game addPlayer:cpuPlayer];
 		
 		// Create the canvas
 		canvas = [[BSCanvasView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 480.0f, 320.0f)];
@@ -98,6 +98,7 @@
 
 
 - (void)doneButtonPressed:(id)sender {
+	[playField generateOccupiedTileCache];
 	BSPlayCPUViewController *cpuPlayField = [[BSPlayCPUViewController alloc] initWithGame:game player:player settings:settings];
 	[self.navigationController pushViewController:cpuPlayField animated:NO];
 }

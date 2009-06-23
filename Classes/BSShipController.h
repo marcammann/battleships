@@ -31,6 +31,7 @@ typedef enum {
 - (void)ship:(id)aShip movedToPoint:(CGPoint)aPoint;
 - (void)ship:(id)aShip rotatedToOrientation:(BSShipOrientation)anOrientation;
 - (CGPoint)ship:(id)aShip pointToMoveForPoint:(CGPoint)aPoint;
+- (CGPoint)ship:(id)aShip closestBoundaryPointForPoint:(CGPoint)aPoint;
 - (BOOL)ship:(id)aShip shouldMoveToPoint:(CGPoint)aPoint;
 - (BOOL)isShipInGrid:(id)aShip;
 @end
@@ -58,7 +59,7 @@ typedef enum {
 	NSNumber *length;
 	
 	// The Delegate, preferably the play field controller, to tell the ship, what it can do
-	id delegate;
+	id<BSShipDelegate> delegate;
 	
 	// The hits this ship has taken
 	NSMutableArray *hits;
@@ -90,6 +91,12 @@ typedef enum {
 
 // Used to move/resize a ship
 - (void)setSize:(BSShipSize)aSize position:(CGPoint)aPosition animated:(BOOL)animated;
+
+// Returns the coordinates of the center of a tile of a ship
+- (CGPoint)centerCoordinateForShipTile:(NSInteger)aTile;
+
+// Rotates the Ship around a specified point
+- (void)setOrientation:(BSShipOrientation)anOrientation aroundAnchor:(CGPoint)anAnchor;
 
 @property (nonatomic, retain) BSShipView *shipView;
 

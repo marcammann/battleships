@@ -15,7 +15,7 @@
 #import "BSShipController.h"
 #import "BSCanvasView.h"
 
-@interface BSPlayCPUViewController : UIViewController {
+@interface BSPlayCPUViewController : UIViewController <BSPlayerControllerWindowDelegate> {
 	// The current game controller
 	BSGameController *game;
 	

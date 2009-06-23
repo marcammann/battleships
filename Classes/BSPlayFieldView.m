@@ -22,6 +22,10 @@
 		indexRow = [[UIView alloc] init];
 		indexColumn = [[UIView alloc] init];
 		[self setTileSize:30.0f];
+		
+		[self addSubview:playField];
+		[self addSubview:indexRow];
+		[self addSubview:indexColumn];
     }
     return self;
 }
@@ -95,14 +99,9 @@
 		playField.image = [UIImage imageNamed:@"playfieldBgPlain.png"];
 	}
 	
-	[playField setClipsToBounds:YES];
-	[self addSubview:playField];
-	
+	//[playField setClipsToBounds:YES];
 	indexRow.backgroundColor = [UIColor greenColor];
-	[self addSubview:indexRow];
-	
 	indexColumn.backgroundColor = [UIColor lightGrayColor];
-	[self addSubview:indexColumn];
 	// Drawing code
 }
 

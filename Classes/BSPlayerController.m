@@ -12,8 +12,10 @@
 @implementation BSPlayerController
 
 @synthesize interactionDelegate;
+@synthesize windowDelegate;
 @synthesize isActive;
 @synthesize playField;
+@synthesize shootingField;
 @synthesize settings;
 
 - (id)initWithSettings:(BSSettings *)theSettings {
@@ -45,6 +47,30 @@
 		[playField addShip:ship];
 		[ship setCoordinate:leftUpper animated:NO];
 	}
+}
+
+//- (void)player:(id)aPlayer madeShot:(
+
+- (void)shotMade:(BSShot *)shot {
+	if (shot.sender == self) {
+		if (shot.hit) {
+			[playField setTileHit:shot.tile];
+		} else {
+			[playField setTileMarked:shot.tile];
+		}
+	}
+	
+	if (shot.receiver == self) {
+		if (shot.hit) {
+			[shootingField setTileHit:shot.tile];
+		} else {
+			[shootingField setTileMarked:shot.tile];
+		}
+	}
+}
+
+- (void)game:(id)game wonByPlayer:(id)player {
+	[windowDelegate player:self endedGame:game withWinner:player];
 }
 
 @end

@@ -40,8 +40,8 @@
 }
 
 @property (nonatomic, readonly) CGPoint dragPosition;
-@property (nonatomic, readonly) CGPoint minCoordinate;
-@property (nonatomic, readonly) CGPoint maxCoordinate;
+@property (nonatomic, readwrite) CGPoint minCoordinate;
+@property (nonatomic, readwrite) CGPoint maxCoordinate;
 @property (nonatomic, readwrite) CGFloat tileSize;
 
 

@@ -59,7 +59,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = touches.anyObject;
 	
-	NSLog(@"touched");
+	//NSLog(@"touched");
 	
 	startTouchPosition = [touch locationInView:[self superview]];
 	dragPosition = self.frame.origin;
@@ -101,11 +101,14 @@
 }
 
 - (CGPoint)minCoordinate {
-	return CGPointMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame));
+	minCoordinate = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame));
+	return minCoordinate;
+	
 }
 
 - (CGPoint)maxCoordinate {
-	return CGPointMake(CGRectGetMaxX(self.frame), CGRectGetMaxY(self.frame));	
+	maxCoordinate = CGPointMake(CGRectGetMaxX(self.frame), CGRectGetMaxY(self.frame));	
+	return maxCoordinate;
 }
 
 - (void)resetDragPosition {

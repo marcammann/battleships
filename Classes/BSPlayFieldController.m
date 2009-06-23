@@ -82,10 +82,10 @@
 
 - (CGPoint)coordinateForGridpoint:(CGPoint)aPoint {
 	CGPoint gridOffset = [self gridOffset];
-	NSLog(@"Grid Offset: %.2f / %.2f", gridOffset.x, gridOffset.y);
+	//NSLog(@"Grid Offset: %.2f / %.2f", gridOffset.x, gridOffset.y);
 	CGPoint coordinates = CGPointMake(gridOffset.x + (aPoint.x * self.fieldView.tileSize), gridOffset.y + (aPoint.y * self.fieldView.tileSize));
 	
-	NSLog(@"%.2f / %.2f", coordinates.x, coordinates.y);
+	//NSLog(@"%.2f / %.2f", coordinates.x, coordinates.y);
 	
 	return coordinates;
 }
@@ -105,7 +105,21 @@
 	CGPoint tileCoordinates = [self coordinateForGridpoint:tile];
 	
 	UIView *overlay = [[UIView alloc] initWithFrame:CGRectMake(tileCoordinates.x, tileCoordinates.y, 30.0f, 30.0f)];
-	overlay.backgroundColor = [UIColor blueColor];
+	overlay.backgroundColor = [UIColor greenColor];
+	
+	[self.fieldView addSubview:overlay];
+}
+
+- (void)setTileHit:(CGPoint)tile {
+	CGPoint tileCoordinates = [self coordinateForGridpoint:tile];
+	
+	UIView *overlay = [[UIView alloc] initWithFrame:CGRectMake(tileCoordinates.x, tileCoordinates.y, 30.0f, 30.0f)];
+	overlay.backgroundColor = [UIColor redColor];
+	
+	
+	UIView *other = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 200.0f)];
+	[fieldView setBackgroundColor:[UIColor blueColor]];
+	[self.fieldView addSubview:other];
 	
 	[self.fieldView addSubview:overlay];
 }
@@ -167,8 +181,14 @@
 
 
 - (BOOL)isTileAssigned:(CGPoint)tile {
-	NSMutableDictionary *dict;
+	[self generateOccupiedTileCache];
+	for (NSValue *occupiedTile in occupiedFields) {
+		if (CGPointEqualToPoint(tile, [occupiedTile CGPointValue])) {
+			return YES;
+		}
+	}
 	
+	return NO;	
 }
 
 
@@ -181,7 +201,7 @@
 	}
 	
 	CGPoint tile = [self tileForCoordinate:aPoint];
-	[self setTileMarked:tile];
+	[self setTileHit:tile];
 	[interactionDelegate playField:self tappedAt:aPoint];
 	
 	
@@ -202,7 +222,7 @@
 - (CGPoint)ship:(id)aShip pointToMoveForPoint:(CGPoint)aPoint {	
 	BSShipController *theShip = (BSShipController *)aShip;
 	
-	NSLog(@"%.2f", theShip.shipView.maxCoordinate.x);
+	//NSLog(@"%.2f", theShip.shipView.maxCoordinate.x);
 	
 	if ([self gridpointForCoordinate:theShip.shipView.maxCoordinate].x > [size intValue] ||
 		[self gridpointForCoordinate:theShip.shipView.maxCoordinate].y > [size intValue] ||
@@ -214,6 +234,30 @@
 	return [self coordinateForGridpoint:[self gridpointForCoordinate:aPoint]];
 }
 
+- (CGPoint)ship:(id)aShip closestBoundaryPointForPoint:(CGPoint)aPoint {
+	BSShipController *theShip = (BSShipController *)aShip;
+	
+	CGPoint boundary = aPoint;
+	NSLog(@"%.2f", [self gridpointForCoordinate:theShip.shipView.maxCoordinate].x);
+	if ([self gridpointForCoordinate:theShip.shipView.maxCoordinate].x > [size intValue]) {
+		boundary.x = [self coordinateForGridpoint:CGPointMake([size intValue] - 1, theShip.position.y)].x;
+	}
+	
+	if ([self gridpointForCoordinate:theShip.shipView.maxCoordinate].y > [size intValue]) {
+		boundary.y = [self coordinateForGridpoint:CGPointMake(theShip.position.x, [size intValue] - 1)].y;
+	}
+	
+	if ([self gridpointForCoordinate:theShip.shipView.minCoordinate].x < 0) {
+		boundary.x = [self coordinateForGridpoint:CGPointMake(0, theShip.position.y)].x;
+	}
+	
+	if ([self gridpointForCoordinate:theShip.shipView.minCoordinate].y < 0) {
+		boundary.y = [self coordinateForGridpoint:CGPointMake(theShip.position.x, 0)].y;
+	}
+	
+	return boundary;
+}
+
 - (BOOL)ship:(id)aShip shouldMoveToPoint:(CGPoint)aPoint {
 	BSShipController *theShip = (BSShipController *)aShip;
 	
@@ -222,7 +266,7 @@
 	CGRect nextFrame = CGRectMake(theShip.shipView.minCoordinate.x + (aPoint.x - theShip.shipView.minCoordinate.x), theShip.shipView.minCoordinate.y + (aPoint.y - theShip.shipView.minCoordinate.y),
 									theShip.shipView.frame.size.width, theShip.shipView.frame.size.height);
 	
-	NSLog(@"%.2f / %.2f | %.2f / %.2f", CGRectGetMinX(nextFrame), CGRectGetMinY(nextFrame), CGRectGetMaxX(nextFrame), CGRectGetMaxY(nextFrame));
+	//NSLog(@"%.2f / %.2f | %.2f / %.2f", CGRectGetMinX(nextFrame), CGRectGetMinY(nextFrame), CGRectGetMaxX(nextFrame), CGRectGetMaxY(nextFrame));
 	
 	// Just check that the leftmost / rightmost point is still in the parentView
 	// And check that the topmost / lowermost point is still in the parentView
@@ -234,7 +278,49 @@
 	return NO;
 }
 
+
+
 # pragma mark RandomPlayField methods
+
+- (void)generateOccupiedTileCache {	
+	NSMutableArray *fields = [NSMutableArray array];
+	for (BSShipController *aShip in ships) {
+		NSArray *shipFields = [[self occupiedTilesForShip:aShip] retain];
+		for (NSValue *value in shipFields) {
+			[fields addObject:value];
+		}
+		
+		[shipFields release];
+	}
+#define _DEBUG
+#ifdef _DEBUG
+	NSLog(@"============== Occupied Fields ================\n");
+	for (NSValue *val in fields) {
+		NSLog(@"%.2f / %.2f", [val CGPointValue].x, [val CGPointValue].y);
+	}
+	NSLog(@"============== End Occupied Fields ================\n");
+#endif
+
+	occupiedFields = [[NSArray arrayWithArray:fields] retain];
+}
+
+- (NSArray *)occupiedTilesForShip:(BSShipController *)aShip {
+	CGPoint endPoint = [self calculateEndPointFromOriginForShip:aShip];
+	CGPoint startPoint = [self gridpointForCoordinate:aShip.shipView.minCoordinate];
+	
+	NSLog(@"Start Point: %.2f / %.2f", aShip.position.x, aShip.position.y);
+	NSLog(@"End Point: %.2f / %.2f", endPoint.x, endPoint.y);
+	
+	NSMutableArray *fields = [NSMutableArray array];
+	
+	for (int i = (int)startPoint.x; i <= (int)endPoint.x; i++) {
+		for (int j = (int)startPoint.y; j <= (int)endPoint.y; j++) {
+			[fields addObject:[NSValue valueWithCGPoint:CGPointMake(i, j)]];
+		}
+	}
+	
+	return [NSArray arrayWithArray:fields];
+}
 
 - (CGPoint)generateRandonCoordinates {
 	// Create random coordinates (inside the play field!)
@@ -242,10 +328,12 @@
 	return originPoint;
 }
 
+
 - (CGPoint)calculateEndPointFromOriginForShip:(BSShipController *)aShip {
-	CGPoint endPoint = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(aShip.position.x + [aShip.length integerValue], aShip.position.y) : CGPointMake(aShip.position.x, aShip.position.y + [aShip.length integerValue]);
+	CGPoint endPoint = (aShip.orientation == BSShipOrientationHorizontal) ? CGPointMake(aShip.position.x + [aShip.length integerValue] - 1, aShip.position.y) : CGPointMake(aShip.position.x, aShip.position.y + [aShip.length integerValue] - 1);
 	return endPoint;
 }
+
 
 - (BOOL)areShipsInteresectingIfShipOneOrig:(CGPoint)pointA shipOneEnd:(CGPoint)pointB 
 								shipTwoOrig:(CGPoint)pointC shipTwoEnd:(CGPoint)pointD {
@@ -266,6 +354,7 @@
 	if (determinant == 0) return NO;
 	else return YES;		
 }
+
 
 - (void)createRandomPlayField:(NSArray *)theShips  {
 	UInt32 shipsCount = 0;

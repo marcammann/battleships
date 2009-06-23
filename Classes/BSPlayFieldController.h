@@ -49,6 +49,9 @@ typedef enum {
 	
 	// Array containing random located ships
 	NSArray *randomShips;
+	
+	// Occupied Fields
+	NSArray *occupiedFields;
 }
 
 // Initializer with size
@@ -81,6 +84,9 @@ typedef enum {
 // Sets a tile in the field as marked
 - (void)setTileMarked:(CGPoint)tile;
 
+// Sets a tile hit
+- (void)setTileHit:(CGPoint)tile;
+
 // Checks if a gridpoint is really in the grid
 - (BOOL)gridpointInGrid:(CGPoint)gridpoint;
 
@@ -92,6 +98,12 @@ typedef enum {
 
 // Checks if all ships are in the grid
 - (BOOL)shipsInGrid;
+
+// Updates the occupiedFields array
+- (void)generateOccupiedTileCache;
+
+// Returns the fields which are occupied from a certain ship
+- (NSArray *)occupiedTilesForShip:(BSShipController *)aShip;
 
 // Creates random coordinates for ships in the play field
 - (CGPoint)generateRandonCoordinates;
@@ -109,6 +121,8 @@ typedef enum {
 // Sets the tile size in the view and all ships
 - (void)setTileSize:(CGFloat)aTileSize;
 
+// Checks if a tile has a ship on it
+- (BOOL)isTileAssigned:(CGPoint)tile;
 
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, assign) id interactionDelegate;

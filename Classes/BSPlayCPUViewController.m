@@ -18,6 +18,7 @@
 		game = [aGame retain];
 		player = [aPlayer retain];
 		player.interactionDelegate = game;
+		player.windowDelegate = self;
 		
 		settings = [theSettings retain];
 		ownPlayField = player.playField;
@@ -27,6 +28,7 @@
 		shootingPlayField.touchEnabled = YES;
 		shootingPlayField.interactionDelegate = player;
 		shootingPlayField.enemy = player;
+		player.shootingField = shootingPlayField;
 	}
 	
 	return self;
@@ -35,21 +37,21 @@
 - (void)loadView {
 	[super loadView];
 	[self.view addSubview:canvas];
-	[canvas addSubview:ownPlayField.view];
+	[canvas addSubview:player.playField.view];
 	
-	for (BSShipController *ship in ownPlayField.ships) {
+	for (BSShipController *ship in player.playField.ships) {
 		[canvas addSubview:ship.view];
 	}
 	
-	[canvas addSubview:shootingPlayField.view];
+	[canvas addSubview:player.shootingField.view];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	[ownPlayField setSize:BSViewSizeSmall position:CGPointMake(330.0f, 0.0f) animated:YES];
-	[shootingPlayField setSize:BSViewSizeLarge position:CGPointMake(0.0f, 0.0f) animated:YES];
+	[player.playField setSize:BSViewSizeSmall position:CGPointMake(330.0f, 0.0f) animated:YES];
+	[player.shootingField setSize:BSViewSizeLarge position:CGPointMake(0.0f, 0.0f) animated:YES];
 	[UIView beginAnimations:@"opacityAnimation" context:NULL];
 	[UIView setAnimationDuration:1.5f];
-	shootingPlayField.view.alpha = 1.0f;
+	player.shootingField.view.alpha = 1.0f;
 	[UIView commitAnimations];
 }
 
@@ -57,5 +59,10 @@
     [super dealloc];
 }
 
+- (void)player:(id)aPlayer endedGame:(id)aGame withWinner:(id)aWinner {
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Win" message:@"You won the game" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+	[alertView show];
+	[alertView release];
+}
 
 @end

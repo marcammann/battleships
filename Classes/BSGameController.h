@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "BSPlayerController.h"
+#import "BSShot.h"
+
 
 @interface BSGameController : NSObject <BSPlayerControllerInteractionDelegate> {
 	// Array of players
