@@ -74,7 +74,8 @@
 - (void)createShips;
 - (void)createPlayField;
 - (void)create:(NSInteger)amount ofShipsWithType:(BSShipType)type atPosition:(CGPoint)leftUpper;
-- (void)shotMade:(BSShot *)shot;
-- (void)game:(id)game wonByPlayer:(id)player;
+
+- (void)game:(id)game hasWinner:(id)player;
+- (void)game:(id)game madeShot:(id)player;
 
 @end

@@ -11,6 +11,14 @@
 
 
 @interface BSSettings : SQLitePersistentObject {
+	// The players nickname
+	NSString *playerName;
+	
+	// The ship counts
+	NSMutableArray *shipCounts;
 }
+
+@property (nonatomic, retain) NSMutableArray *shipCounts;
+@property (nonatomic, retain) NSString *playerName;
 
 @end

@@ -11,4 +11,7 @@
 
 @implementation BSSettings
 	
+@synthesize playerName;
+@synthesize shipCounts;
+
 @end

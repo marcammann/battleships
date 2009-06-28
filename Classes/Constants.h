@@ -27,4 +27,6 @@ typedef enum {
 
 #define CGLog(v) NSLog(@"%.2f / %.2f", v.x, v.y)
 
+#define _DEBUG
+
 #endif

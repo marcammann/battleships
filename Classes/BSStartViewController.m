@@ -42,12 +42,21 @@
 	vsPlayerButton.frame = CGRectMake(buttonXPos, buttonYPos, kStartButtonWidth, kStartButtonHeight);
 	buttonYPos += kStartButtonHeight + 10.0f;
 	vsNetworkButton.frame = CGRectMake(buttonXPos, buttonYPos, kStartButtonWidth, kStartButtonHeight);
+	[vsNetworkButton setTitle:@"vs. Network" forState:UIControlStateNormal];
+	[vsNetworkButton addTarget:self action:@selector(loadNetworkGame) forControlEvents:UIControlEventTouchUpInside];
+	
 	buttonYPos += kStartButtonHeight + 10.0f;
 	settingsButton.frame = CGRectMake(buttonXPos, buttonYPos, kStartButtonWidth, kStartButtonHeight);
 }
 
 - (void)loadCPUGame {
 	BSSetupCPUSkillViewController *viewController = [[BSSetupCPUSkillViewController alloc] init];
+	[self.navigationController pushViewController:viewController animated:YES];
+	[viewController release];
+}
+
+- (void)loadNetworkGame {
+	BSSetupNetworkPeerViewController *viewController = [[BSSetupNetworkPeerViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
 	[viewController release];
 }

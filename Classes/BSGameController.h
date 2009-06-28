@@ -10,6 +10,11 @@
 #import "BSPlayerController.h"
 #import "BSShot.h"
 
+@protocol BSGameControllerPlayerDelegate
+- (void)game:(id)aGame madeShot:(BSShot *)aShot;
+- (void)game:(id)aGame hasWinner:(BSPlayerController *)aPlayer;
+@end
+
 
 @interface BSGameController : NSObject <BSPlayerControllerInteractionDelegate> {
 	// Array of players
@@ -19,7 +24,7 @@
 	NSMutableArray *shots;
 	
 	// The winner of the game
-	BSPlayerController *winner;
+	BSPlayerController<BSGameControllerPlayerDelegate> *winner;
 }
 
 @property (readonly, getter=winner) BSPlayerController *winner; 

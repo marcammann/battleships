@@ -49,9 +49,8 @@
 	}
 }
 
-//- (void)player:(id)aPlayer madeShot:(
 
-- (void)shotMade:(BSShot *)shot {
+- (void)game:(id)aGame madeShot:(BSShot *)shot {
 	if (shot.sender == self) {
 		if (shot.hit) {
 			[playField setTileHit:shot.tile];
@@ -69,8 +68,8 @@
 	}
 }
 
-- (void)game:(id)game wonByPlayer:(id)player {
-	[windowDelegate player:self endedGame:game withWinner:player];
+- (void)game:(id)aGame hasWinner:(BSPlayerController *)aPlayer {
+	[windowDelegate player:self endedGame:aGame withWinner:aPlayer];
 }
 
 @end

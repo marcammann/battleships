@@ -33,21 +33,15 @@
 	shot.tile = tile;
 	shot.hit = [[(BSPlayerController *)shotPlayer playField] isTileAssigned:tile];
 	
-	NSLog(@"shot: =======");
-	CGLog(shot.tile);
-	NSLog(@"%i", shot.hit);
-	
 	[shots addObject:shot];
 	
 	for (BSPlayerController *player in players) {
-		[player shotMade:shot];
+		[player game:self madeShot:shot];
 		
 		if ([self  hasWinner]) {
-			[player game:self wonByPlayer:player];
+			[player game:self hasWinner:winner];
 		}
 	}
-	
-	
 }
 
 - (BOOL)hasWinner {
@@ -61,6 +55,8 @@
 	if (hits == 5) {
 		return YES;
 	}
+	
+	return NO;
 }
 
 - (void)playerDidPauseGame:(id)aPlayer {
@@ -72,7 +68,7 @@
 }
 
 - (BOOL)playerCanPauseGame:(id)aPlayer {
-	
+	return NO;
 }
 
 - (void)playerDidQuitGame:(id)aPlayer {

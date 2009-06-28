@@ -285,14 +285,14 @@
 - (void)generateOccupiedTileCache {	
 	NSMutableArray *fields = [NSMutableArray array];
 	for (BSShipController *aShip in ships) {
-		NSArray *shipFields = [[self occupiedTilesForShip:aShip] retain];
+		NSArray *shipFields = [aShip.tiles retain];
 		for (NSValue *value in shipFields) {
 			[fields addObject:value];
 		}
 		
 		[shipFields release];
 	}
-#define _DEBUG
+
 #ifdef _DEBUG
 	NSLog(@"============== Occupied Fields ================\n");
 	for (NSValue *val in fields) {

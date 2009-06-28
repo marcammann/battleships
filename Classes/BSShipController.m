@@ -24,6 +24,8 @@
 @synthesize position;
 @synthesize tileSize;
 @synthesize relativeCoordinates;
+@synthesize tiles;
+
 
 - (id)initWithType:(BSShipType)theType {
 	if (self = [super init]) {
@@ -31,6 +33,8 @@
 		orientation = BSShipOrientationVertical;
 		tileSize = 30.0f;
 		length = [NSNumber numberWithInt:(type + 2)];
+		
+		tiles = [[NSMutableArray array] retain];
 		
 		self.shipView = [[BSShipView alloc] initWithTileSize:tileSize frame:CGRectMake(0.0f, 0.0f, tileSize, tileSize * [[NSNumber numberWithInt:type + 2] intValue]) controller:self];
 
@@ -51,7 +55,20 @@
 			position = CGPointMake(-1.0f, -1.0f);
 		}
 		
-		CGLog(position);
+		// Get Min/Max Coordinate tiles and iterate over them to get all the tiles the ship is using
+		[self calculateTiles];
+		
+#ifdef _DEBUG
+		NSLog(@"======== Ship Moved: ==========");
+		NSLog(@"Type: %i", type);
+		NSLog(@"Frame: x:%.2f y:%.2f / width:%.2f height:%.2f", shipView.frame.origin.x, shipView.frame.origin.y, shipView.frame.size.width, shipView.frame.size.height);
+		NSLog(@"Tiles: ");
+		for (NSValue *val in tiles) {
+			NSLog(@"x:%.0f  y:%.0f", [val CGPointValue].x, [val CGPointValue].y);
+		}
+		NSLog(@"Position: x:%.0f y:%.0f", position.x, position.y);
+		NSLog(@"===============================");
+#endif
 	} else {
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 	}
@@ -96,6 +113,22 @@
 }
 
 # pragma mark Accessor Methods
+
+- (void)calculateTiles {
+	CGPoint endPoint = [(BSPlayFieldController *)playFieldController calculateEndPointFromOriginForShip:self];
+	CGPoint startPoint = [(BSPlayFieldController *)playFieldController gridpointForCoordinate:shipView.minCoordinate];
+	
+	[tiles removeAllObjects];
+	
+	for (int i = (int)startPoint.x; i <= (int)endPoint.x; i++) {
+		if (i >= 10 || i < 0) { continue; }
+		for (int j = (int)startPoint.y; j <= (int)endPoint.y; j++) {
+			if (j >= 10 || i < 0) { continue; }
+			[tiles addObject:[NSValue valueWithCGPoint:CGPointMake(i, j)]];
+		}
+	}
+	
+}
 
 - (NSNumber *)length {
 	length = [NSNumber numberWithInt:(type + 2)];
@@ -148,20 +181,7 @@
 	CGPoint diff = CGPointMake(self.view.center.x - anAnchor.x, self.view.center.y - anAnchor.y);
 	CGPoint newCenter = CGPointMake(anAnchor.x + diff.y, anAnchor.y + diff.x);
 
-#ifdef _DEBUG
-	NSLog(@"Anchor =====");
-	CGLog(anAnchor);
-	CGPoint anchorInShip = [self.view convertPoint:anAnchor fromView:self.view.superview];
-	NSLog(@"Ship Anchor =====");
-	CGLog(anchorInShip);
-	CGPoint normalizedAnchorInShip = CGPointMake(anchorInShip.x / CGRectGetWidth(shipView.frame), anchorInShip.y / CGRectGetHeight(shipView.frame));
-	NSLog(@"Normalized =====");
-	CGLog(normalizedAnchorInShip);
-	CGPoint test = [self.view convertPoint:CGPointMake(0.0f, 0.0f) toView:self.view.superview];
-	NSLog(@"Test: =====");
-	CGLog(test);
-#endif
-	
+
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.5f];
 	if (anOrientation == BSShipOrientationVertical) {

@@ -72,6 +72,9 @@ typedef enum {
 	
 	// Coordinates relative to the play field
 	CGPoint relativeCoordinates;
+	
+	// Tiles the ship is on
+	NSMutableArray *tiles;
 }
 
 // Initializer with the type
@@ -98,7 +101,12 @@ typedef enum {
 // Rotates the Ship around a specified point
 - (void)setOrientation:(BSShipOrientation)anOrientation aroundAnchor:(CGPoint)anAnchor;
 
+// Loads all used tiled from the current position
+- (void)calculateTiles;
+
 @property (nonatomic, retain) BSShipView *shipView;
+
+@property (nonatomic, readonly) NSMutableArray *tiles;
 
 @property (readwrite, getter=isMovable) BOOL movable;
 @property (readwrite, getter=isRotatable) BOOL rotatable;

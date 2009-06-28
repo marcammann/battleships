@@ -52,6 +52,9 @@
 		49CE01C70FF00E5F0074FA21 /* BSPlayerControllerCPU.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CE01C60FF00E5F0074FA21 /* BSPlayerControllerCPU.m */; };
 		49CE01CC0FF012200074FA21 /* BSPlayerControllerHuman.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CE01CB0FF012200074FA21 /* BSPlayerControllerHuman.m */; };
 		49CE02B00FF02E360074FA21 /* BSShootingFieldController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CE02AF0FF02E360074FA21 /* BSShootingFieldController.m */; };
+		49E1C9EA0FF7AE84004F9948 /* BSSetupNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C9E90FF7AE84004F9948 /* BSSetupNetworkViewController.m */; };
+		49E1C9EE0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C9ED0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m */; };
+		49E1C9FA0FF7B5C8004F9948 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E1C9F90FF7B5C8004F9948 /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +141,11 @@
 		49CE01CB0FF012200074FA21 /* BSPlayerControllerHuman.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayerControllerHuman.m; sourceTree = "<group>"; };
 		49CE02AE0FF02E360074FA21 /* BSShootingFieldController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSShootingFieldController.h; sourceTree = "<group>"; };
 		49CE02AF0FF02E360074FA21 /* BSShootingFieldController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSShootingFieldController.m; sourceTree = "<group>"; };
+		49E1C9E80FF7AE84004F9948 /* BSSetupNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSSetupNetworkViewController.h; sourceTree = "<group>"; };
+		49E1C9E90FF7AE84004F9948 /* BSSetupNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSSetupNetworkViewController.m; sourceTree = "<group>"; };
+		49E1C9EC0FF7B246004F9948 /* BSSetupNetworkPeerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSSetupNetworkPeerViewController.h; sourceTree = "<group>"; };
+		49E1C9ED0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSSetupNetworkPeerViewController.m; sourceTree = "<group>"; };
+		49E1C9F90FF7B5C8004F9948 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +159,7 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				49476F210FE6B65A0077713D /* QuartzCore.framework in Frameworks */,
 				496B10B00FEA69C400D2EA39 /* libsqlite3.dylib in Frameworks */,
+				49E1C9FA0FF7B5C8004F9948 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +228,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49E1C9F90FF7B5C8004F9948 /* GameKit.framework */,
 				496B10AF0FEA69C400D2EA39 /* libsqlite3.dylib */,
 				49476F200FE6B65A0077713D /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -288,6 +298,7 @@
 				49A1E15C0F82C7DC003021C0 /* BSStartViewController.h */,
 				49A1E15D0F82C7DC003021C0 /* BSStartViewController.m */,
 				496B0F040FEA677300D2EA39 /* CPU */,
+				49E1C9EB0FF7AF55004F9948 /* Network */,
 			);
 			name = "Other Interface";
 			sourceTree = "<group>";
@@ -351,6 +362,17 @@
 				496B0F430FEA68CC00D2EA39 /* UIImage-SQLitePersistence.m */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		49E1C9EB0FF7AF55004F9948 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				49E1C9E80FF7AE84004F9948 /* BSSetupNetworkViewController.h */,
+				49E1C9E90FF7AE84004F9948 /* BSSetupNetworkViewController.m */,
+				49E1C9EC0FF7B246004F9948 /* BSSetupNetworkPeerViewController.h */,
+				49E1C9ED0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +467,8 @@
 				49CE01CC0FF012200074FA21 /* BSPlayerControllerHuman.m in Sources */,
 				49CE02B00FF02E360074FA21 /* BSShootingFieldController.m in Sources */,
 				493BCD370FF1092A0078672B /* BSShot.m in Sources */,
+				49E1C9EA0FF7AE84004F9948 /* BSSetupNetworkViewController.m in Sources */,
+				49E1C9EE0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,7 +519,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos2.2.1;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
 		};
