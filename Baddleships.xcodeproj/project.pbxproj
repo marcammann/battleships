@@ -55,6 +55,9 @@
 		49E1C9EA0FF7AE84004F9948 /* BSSetupNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C9E90FF7AE84004F9948 /* BSSetupNetworkViewController.m */; };
 		49E1C9EE0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E1C9ED0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m */; };
 		49E1C9FA0FF7B5C8004F9948 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E1C9F90FF7B5C8004F9948 /* GameKit.framework */; };
+		49EB9433100A3FB4008DB994 /* BSGameDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EB9432100A3FB4008DB994 /* BSGameDirector.m */; };
+		49EB9467100BC389008DB994 /* BSGameClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EB9466100BC389008DB994 /* BSGameClient.m */; };
+		49EB9491100BC9E7008DB994 /* BSPlayerOpponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EB9490100BC9E7008DB994 /* BSPlayerOpponent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +149,12 @@
 		49E1C9EC0FF7B246004F9948 /* BSSetupNetworkPeerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSSetupNetworkPeerViewController.h; sourceTree = "<group>"; };
 		49E1C9ED0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSSetupNetworkPeerViewController.m; sourceTree = "<group>"; };
 		49E1C9F90FF7B5C8004F9948 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		49EB9431100A3FB4008DB994 /* BSGameDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGameDirector.h; sourceTree = "<group>"; };
+		49EB9432100A3FB4008DB994 /* BSGameDirector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSGameDirector.m; sourceTree = "<group>"; };
+		49EB9465100BC389008DB994 /* BSGameClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGameClient.h; sourceTree = "<group>"; };
+		49EB9466100BC389008DB994 /* BSGameClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSGameClient.m; sourceTree = "<group>"; };
+		49EB948F100BC9E7008DB994 /* BSPlayerOpponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayerOpponent.h; sourceTree = "<group>"; };
+		49EB9490100BC9E7008DB994 /* BSPlayerOpponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayerOpponent.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -282,6 +291,12 @@
 				496B0EC00FEA44F500D2EA39 /* BSGameController.m */,
 				493BCD350FF1092A0078672B /* BSShot.h */,
 				493BCD360FF1092A0078672B /* BSShot.m */,
+				49EB9431100A3FB4008DB994 /* BSGameDirector.h */,
+				49EB9432100A3FB4008DB994 /* BSGameDirector.m */,
+				49EB9465100BC389008DB994 /* BSGameClient.h */,
+				49EB9466100BC389008DB994 /* BSGameClient.m */,
+				49EB948F100BC9E7008DB994 /* BSPlayerOpponent.h */,
+				49EB9490100BC9E7008DB994 /* BSPlayerOpponent.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -469,6 +484,9 @@
 				493BCD370FF1092A0078672B /* BSShot.m in Sources */,
 				49E1C9EA0FF7AE84004F9948 /* BSSetupNetworkViewController.m in Sources */,
 				49E1C9EE0FF7B246004F9948 /* BSSetupNetworkPeerViewController.m in Sources */,
+				49EB9433100A3FB4008DB994 /* BSGameDirector.m in Sources */,
+				49EB9467100BC389008DB994 /* BSGameClient.m in Sources */,
+				49EB9491100BC9E7008DB994 /* BSPlayerOpponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

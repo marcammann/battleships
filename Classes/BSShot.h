@@ -8,13 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+	BSShotHitUnknown,
+	BSShotHitYes,
+	BSShotHitNo,
+} BSShotHit;
+
+typedef struct {
+	CGPoint tile;
+	BSShotHit hit;
+	char sender[128];
+	char receiver[128];
+} shotInfo;
 
 @interface BSShot : NSObject {
 	// The shot tile
 	CGPoint tile;
 	
 	// Hit or no Hit
-	BOOL hit;
+	BSShotHit hit;
 	
 	// Sender and receiver of the shot
 	id sender;
@@ -22,8 +34,11 @@
 }
 
 @property (nonatomic, readwrite) CGPoint tile;
-@property (nonatomic, readwrite) BOOL hit;
+@property (nonatomic, readwrite) BSShotHit hit;
 @property (nonatomic, assign) id sender;
 @property (nonatomic, assign) id receiver;
+
+- (NSData *)data;
+- (id)initWithData:(NSData *)data;
 
 @end

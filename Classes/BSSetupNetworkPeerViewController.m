@@ -7,7 +7,7 @@
 //
 
 #import "BSSetupNetworkPeerViewController.h"
-
+#import "BSGameClient.h"
 
 @implementation BSSetupNetworkPeerViewController
 
@@ -47,16 +47,13 @@
 }
 
 - (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession: (GKSession *) session {
-	// Use a retaining property to take ownership of the session.
-    self.gameSession = session;
-	// Assumes our object will also become the session's delegate.
-    session.delegate = self;
-    [session setDataReceiveHandler: self withContext:nil];
-	// Remove the picker.
+	BSGameClient *gameClient = [[BSGameClient alloc] initWithSession:session peerID:peerID];
+    
+	
     picker.delegate = nil;
     [picker dismiss];
     [picker autorelease];
-	// Start your game.
+
 }
 
 - (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker {

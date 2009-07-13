@@ -16,4 +16,12 @@
 @synthesize sender;
 @synthesize receiver;
 
+- (id)initWithData:(NSData *)aData {
+	
+}
+
+- (NSData *)data {
+	
+}
+
 @end
