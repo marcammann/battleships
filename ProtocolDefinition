@@ -1,0 +1,47 @@
+Formal Protocol Definition:
+    # SETUP
+    - create
+    - join
+        - ok
+        - nook
+    
+    # SHIP PLACING
+    - send_field
+        - player_ready
+        
+    # GAME STARTUP
+    - start_game
+        - will_start_game
+        - disconnect
+        - start_game
+        
+    # SHOOTING ACTION
+        - set_active
+    - shoot
+        - player_shoot/hit
+        - player_ship_down
+        - player_out
+        - player_won
+        - stop_game
+        
+    # IN GAME INTERACTION
+    - can_pause
+        - ok
+        - nook
+    - pause
+        - player_paused
+    
+    - quit
+        - player_quit
+    
+    - [timeout]
+        - player_disconnected
+    
+    - send_message_all
+        - player_message
+    - send_message_user
+        - player_message
+        
+
+
+    

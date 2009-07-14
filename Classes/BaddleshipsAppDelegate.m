@@ -15,7 +15,7 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	//[application setStatusBarHidden:YES];
-	
+
 	baseContainer = [[BSStartViewController alloc] init];
 	
 	UINavigationController *baseNavigation = [[UINavigationController alloc] initWithRootViewController:baseContainer];

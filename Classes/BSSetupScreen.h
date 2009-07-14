@@ -7,14 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import <QuartzCore/QuartzCore.h>
 #import "BSShipView.h"
 #import "BSPlayFieldView.h"
 #import "BSPlayFieldController.h"
 #import "BSCanvasView.h"
 
-@interface BSSetupScreen : UIView {
+@interface BSSetupScreen : UIView <BSPlayFieldDisplayDelegate> {
+	
+	UIButton *helpButton;
+	UIButton *continueButton;
+	
 	NSArray *ships;
-	BSPlayFieldController *playFieldController;
+	BSPlayFieldController *ownFieldController;
 	
 	BSCanvasView *canvas;
 }

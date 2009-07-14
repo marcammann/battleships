@@ -1,0 +1,3 @@
+[submodule "vendor/ASIHTTPRequest"]
+	path = vendor/ASIHTTPRequest
+	url = git@github.com:marcammann/asi-http-request.git

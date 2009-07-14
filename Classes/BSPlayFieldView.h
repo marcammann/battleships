@@ -7,25 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Constants.h"
 
-@interface BSPlayFieldBlock : UIView {
-	NSInteger x;
-	NSInteger y;
-	BOOL occupied;
-}
-
-@property (assign) NSInteger x, y;
-@property (assign) BOOL occupied;
+@protocol BSPlayFieldViewDelegate
+- (void)fieldView:(id)field tappedAt:(CGPoint)aPoint;
 @end
 
+
 @interface BSPlayFieldView : UIView {
-	UIView *playField;
+	UIImageView *playField;
 	UIView *indexRow;
 	UIView *indexColumn;
+	
+	id<BSPlayFieldViewDelegate> controller;
+	
+	NSNumber *size;
+	
+	CGFloat tileSize;
 }
 
-@property (readonly) UIView *playField;
+@property (readonly) UIImageView *playField;
+@property (nonatomic, readwrite) CGFloat tileSize;
+@property (nonatomic, assign) id controller;
 
-- (id)initWithTilenumber:(NSInteger)number;
+- (id)initWithSize:(NSNumber *)size;
+- (void)animateToViewSize:(BSViewSize)aSize position:(CGPoint)position duration:(CGFloat)duration;
 
 @end
