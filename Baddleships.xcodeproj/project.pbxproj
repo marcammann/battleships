@@ -19,6 +19,8 @@
 		49476F210FE6B65A0077713D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49476F200FE6B65A0077713D /* QuartzCore.framework */; };
 		49476F5B0FE6C05D0077713D /* playfieldBgPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */; };
 		49476F860FE6D05C0077713D /* playfieldBgSmallPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */; };
+		495F5648100CF99300F24F14 /* BSGameClientLocalServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 495F5647100CF99300F24F14 /* BSGameClientLocalServer.m */; };
+		495F564B100CF9A000F24F14 /* BSGameClientLocalClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 495F564A100CF9A000F24F14 /* BSGameClientLocalClient.m */; };
 		496B0E950FEA3E1800D2EA39 /* BSPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0E940FEA3E1800D2EA39 /* BSPlayerController.m */; };
 		496B0EC10FEA44F500D2EA39 /* BSGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0EC00FEA44F500D2EA39 /* BSGameController.m */; };
 		496B0F070FEA679300D2EA39 /* BSSetupCPUSkillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496B0F060FEA679300D2EA39 /* BSSetupCPUSkillViewController.m */; };
@@ -79,6 +81,10 @@
 		49476F200FE6B65A0077713D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		49476F5A0FE6C05D0077713D /* playfieldBgPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playfieldBgPlain.png; sourceTree = "<group>"; };
 		49476F850FE6D05C0077713D /* playfieldBgSmallPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playfieldBgSmallPlain.png; sourceTree = "<group>"; };
+		495F5646100CF99300F24F14 /* BSGameClientLocalServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGameClientLocalServer.h; sourceTree = "<group>"; };
+		495F5647100CF99300F24F14 /* BSGameClientLocalServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSGameClientLocalServer.m; sourceTree = "<group>"; };
+		495F5649100CF9A000F24F14 /* BSGameClientLocalClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGameClientLocalClient.h; sourceTree = "<group>"; };
+		495F564A100CF9A000F24F14 /* BSGameClientLocalClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSGameClientLocalClient.m; sourceTree = "<group>"; };
 		496B0E930FEA3E1800D2EA39 /* BSPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPlayerController.h; sourceTree = "<group>"; };
 		496B0E940FEA3E1800D2EA39 /* BSPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPlayerController.m; sourceTree = "<group>"; };
 		496B0EBF0FEA44F500D2EA39 /* BSGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGameController.h; sourceTree = "<group>"; };
@@ -297,6 +303,10 @@
 				49EB9466100BC389008DB994 /* BSGameClient.m */,
 				49EB948F100BC9E7008DB994 /* BSPlayerOpponent.h */,
 				49EB9490100BC9E7008DB994 /* BSPlayerOpponent.m */,
+				495F5646100CF99300F24F14 /* BSGameClientLocalServer.h */,
+				495F5647100CF99300F24F14 /* BSGameClientLocalServer.m */,
+				495F5649100CF9A000F24F14 /* BSGameClientLocalClient.h */,
+				495F564A100CF9A000F24F14 /* BSGameClientLocalClient.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -487,6 +497,8 @@
 				49EB9433100A3FB4008DB994 /* BSGameDirector.m in Sources */,
 				49EB9467100BC389008DB994 /* BSGameClient.m in Sources */,
 				49EB9491100BC9E7008DB994 /* BSPlayerOpponent.m in Sources */,
+				495F5648100CF99300F24F14 /* BSGameClientLocalServer.m in Sources */,
+				495F564B100CF9A000F24F14 /* BSGameClientLocalClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,12 +543,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Marc Ammann (M45JHAKBM4)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6A3F0264-3FA5-44AD-BA29-29283DBAE5B1";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;

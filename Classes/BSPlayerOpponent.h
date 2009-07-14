@@ -25,7 +25,7 @@ typedef struct {
 	BSPlayFieldController *shootingField;
 }
 
-@property (nonatomic, retain) NSString *peerID;
+@property (nonatomic, readwrite) NSInteger *playerID;
 @property (nonatomic, retain) NSString *displayName;
 @property (nonatomic, retain) BSPlayFieldController *shootingField;
 

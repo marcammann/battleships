@@ -13,6 +13,7 @@
 
 @synthesize shootingField;
 @synthesize displayName;
+@synthesize playerID;
 
 - (void)dealloc {
 	[shootingField release];

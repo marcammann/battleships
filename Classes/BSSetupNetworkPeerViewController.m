@@ -7,15 +7,18 @@
 //
 
 #import "BSSetupNetworkPeerViewController.h"
-#import "BSGameClient.h"
 
 @implementation BSSetupNetworkPeerViewController
 
 @synthesize gameSession;
 
-- (id)init {
+- (id)initAsServer:(BOOL)_asServer {
 	if (self = [super init]) {
+		isServer = _asServer;
 		
+		if (isServer) {
+			gameDirector = [[BSGameDirector alloc] init];
+		}
 	}
 	
 	return self;
@@ -24,43 +27,32 @@
 - (void)loadView {
 	[super loadView];
 	
-	GKPeerPickerController *picker = [[GKPeerPickerController alloc] init];
-	picker.delegate = self;
-	picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby | GKPeerPickerConnectionTypeOnline;
+	if (isServer) {
+		gameSession = [[GKSession alloc] initWithSessionID:@"com.hadronicmonkee.battleships" displayName:@"Admiral Kirk" sessionMode:GKSessionModeServer];
+	} else {
+		gameSession = [[GKSession alloc] initWithSessionID:@"com.hadronicmonkee.battleships" displayName:@"Sergeant Zulu" sessionMode:GKSessionModeClient];
+	}
 	
-	[picker show];
+	gameSession.delegate = self;
+	[gameSession setDataReceiveHandler:self withContext:nil];
+	gameSession.available = YES;
 }
 
-- (void)peerPickerController:(GKPeerPickerController *)picker didSelectConnectionType:(GKPeerPickerConnectionType)type {
-    if (type == GKPeerPickerConnectionTypeOnline) {
-        picker.delegate = nil;
-        [picker dismiss];
-        [picker autorelease];
-		// Implement your own internet user interface here.
-    }
+- (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID {
+	NSLog(@"Connection Requested!");
+	gameClient = [[BSGameClientLocalServer alloc] initWithGameSession:session peerID:peerID];
+	[gameClient session:session didReceiveConnectionRequestFromPeer:peerID];
 }
 
-- (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type {
-    GKSession* session = [[GKSession alloc] initWithSessionID:@"com.hadronicmonkee.battleships" displayName:@"Admiral Kirk" sessionMode:GKSessionModePeer];
-    [session autorelease];
-    return session;
+- (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
+	NSLog(@"Connection State Changed");
+	if (isServer == NO) {
+		gameClientClient = [[BSGameClientLocalClient alloc] initWithGameSession:session peerID:peerID];
+		[session connectToPeer:peerID withTimeout:10.0f];
+		[gameClientClient session:session peer:peerID didChangeState:state];
+	}
 }
 
-- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession: (GKSession *) session {
-	BSGameClient *gameClient = [[BSGameClient alloc] initWithSession:session peerID:peerID];
-    
-	
-    picker.delegate = nil;
-    [picker dismiss];
-    [picker autorelease];
-
-}
-
-- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker {
-    picker.delegate = nil;
-    // The controller dismisses the dialog automatically.
-    [picker autorelease];
-}
 
 - (void)dealloc {
     [super dealloc];

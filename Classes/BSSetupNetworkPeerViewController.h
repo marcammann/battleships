@@ -9,9 +9,20 @@
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
 
-@interface BSSetupNetworkPeerViewController : UIViewController <GKPeerPickerControllerDelegate, GKSessionDelegate> {
+#import "BSGameDirector.h"
+#import "BSGameClientLocalServer.h"
+#import "BSGameClientLocalClient.h"
 
+
+@interface BSSetupNetworkPeerViewController : UIViewController <GKPeerPickerControllerDelegate, GKSessionDelegate> {
+	BSGameDirector *gameDirector;
+
+	BSGameClientLocalServer *gameClient;
+	BSGameClientLocalClient *gameClientClient;
+	
 	GKSession *gameSession;
+	
+	BOOL isServer;
 }
 
 @property (nonatomic, retain) GKSession *gameSession;

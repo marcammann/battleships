@@ -21,15 +21,13 @@
 }
 
 - (void *)data {
-	/*
 	shotInfo *info = (shotInfo *)malloc(sizeof(shotInfo));
 	info->tile = tile;
 	info->hit = hit;
 	info->senderID = [(BSPlayerOpponent *)sender playerID];
 	info->receiverID = [(BSPlayerOpponent *)receiver playerID];
-	 */
 	
-	//return info;
+	return info;
 }
 
 @end
