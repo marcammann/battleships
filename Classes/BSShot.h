@@ -15,10 +15,10 @@ typedef enum {
 } BSShotHit;
 
 typedef struct {
+	int senderID;
+	int receiverID;
 	CGPoint tile;
 	BSShotHit hit;
-	char sender[128];
-	char receiver[128];
 } shotInfo;
 
 @interface BSShot : NSObject {
@@ -38,7 +38,7 @@ typedef struct {
 @property (nonatomic, assign) id sender;
 @property (nonatomic, assign) id receiver;
 
-- (NSData *)data;
+- (void *)data;
 - (id)initWithData:(NSData *)data;
 
 @end

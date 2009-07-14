@@ -22,6 +22,8 @@
 		
 		[session setDataReceiveHandler:self withContext:nil];
 		session.delegate = self;
+		
+		gamePacketNumber = 0;
 	}
 	
 	return self;
@@ -86,10 +88,6 @@
 
 #pragma mark Network Stuff
 
-- (void)sendShot:(BSShot *)aShot toPeer:(BSPlayerOpponent *)aPlayer {
-	
-}
-
 - (void)sendNetworkPacket:(GKSession *)session packetID:(int)packetID data:(void *)data length:(int)length {
 	static unsigned char packet[1024];
 	const unsigned int headerSize = 2 * sizeof(int);
@@ -103,7 +101,7 @@
 		NSData *packet = [NSData dataWithBytes:packet length:(length+headerSize)];
 		
 		NSError *err = [[[NSError alloc] init] autorelease];
-		[session sendData:data toPeers:[NSArray arrayWithObject:[aPlayer peerID]] withDataMode:GKSendDataReliable error:&err];
+		[self.session sendData:data toPeers:[NSArray arrayWithObject:self.peerID] withDataMode:GKSendDataReliable error:&err];
 	} else {
 		
 	}

@@ -10,6 +10,20 @@
 
 #import "BSShipView.h"
 
+// Linked List for tiles
+typedef struct tileStruct {
+	int shipID;
+	CGPoint tile;
+	struct tileStruct *nextTile;
+} tileInfo;
+
+typedef struct {
+	int shipID;
+	int playerID;
+	int length;
+	tileInfo *firstTile;
+} shipInfo;
+
 typedef enum {
 	BSShipOrientationHorizontal,
 	BSShipOrientationVertical,

@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "BSPlayFieldController.h"
 
+typedef struct {
+	int playerID;
+	char displayName[128];
+} playerInfo;
+
 @interface BSPlayerOpponent : NSObject {
 	// The players ID
-	NSString *peerID;
+	NSInteger *playerID;
 
 	// Display Name
 	NSString *displayName;
