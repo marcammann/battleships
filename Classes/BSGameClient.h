@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 #import "BSShot.h"
+#import "BSPlayerController.h"
 
-typedef struct {
-	
-	
-} 
+typedef enum {
+	NETWORK_SHOT,
+	NETWORK_FIELD,
+	NETWORK_HEARTBEAT,
+} packetCode;
+
 
 @interface BSGameClient : NSObject <GKSessionDelegate, BSPlayerControllerInteractionDelegate> {
 	// The Session, the client is using
@@ -31,7 +34,7 @@ typedef struct {
 	// If the current client is active
 	BOOL isActive;
 	
-	
+	// The current game packet number
 	int gamePacketNumber;
 }
 

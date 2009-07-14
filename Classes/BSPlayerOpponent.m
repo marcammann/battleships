@@ -12,12 +12,10 @@
 @implementation BSPlayerOpponent
 
 @synthesize shootingField;
-@synthesize peerID;
 @synthesize displayName;
 
 - (void)dealloc {
 	[shootingField release];
-	[peerID release];
 	[displayName release];
 	[super dealloc];
 }
